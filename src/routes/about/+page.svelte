@@ -4,7 +4,7 @@
 			Former developer - part-time process nerd - full-time advocate for teams that work well and care deeply - lifelong believer that the best engineering cultures are the ones that value both high standards and high trust.
 		</p>
 		<p class="pt-4 md:text-lg">
-			I'm a software engineering leader who believes that great teams build great systems—and that good management is about more than just process and delivery. It's about coaching humans to grow, thrive, and do the best work of their lives.
+			I'm a software engineering leader who believes that great teams build great products and that good management is about more than just process and delivery. It's about coaching humans to grow, thrive, and do the best work of their lives.
 		</p>
 		<p class="pt-4 md:text-lg">
 			I've led teams across the stack, coached engineers of all levels through growth, helped rewrite platforms without (completely) breaking everything, worked side by side with product and design teams, overhauled hiring systems and helped organizations find clarity in chaos.
@@ -49,6 +49,8 @@
   @media (max-width: 735px) {
     padding: 1rem;
     min-width: 90vw;
+    max-height: 64vh;
+    top: 37%;
   }
 }
 </style>

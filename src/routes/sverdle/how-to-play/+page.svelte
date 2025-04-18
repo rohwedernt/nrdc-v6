@@ -3,7 +3,7 @@
 	<meta name="description" content="How to play Sverdle" />
 </svelte:head>
 
-<div class="text-column">
+<div class="text-column glass-panel">
 	<h1>How to play Sverdle</h1>
 
 	<p>
@@ -41,9 +41,43 @@
 		impossible to cheat. It uses <code>&lt;form&gt;</code> and cookies to submit data, meaning you can
 		even play with JavaScript disabled!
 	</p>
+
+	<a class="pt-4 text-2xl" href="/sverdle">
+		← Back to the game
+	</a>
 </div>
 
 <style>
+	.glass-panel {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+
+		padding: 2rem;
+
+		margin: auto;
+
+		color: black;
+
+		background: rgba(255, 255, 255, 0.75);
+		border-radius: 1rem;
+		backdrop-filter: blur(6px);
+		-webkit-backdrop-filter: blur(6px);
+		box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+		border: 1px solid rgba(255, 255, 255, 0.3);
+
+		display: flex;
+		flex-direction: column;
+		overflow: auto;
+
+		z-index: 3;
+
+		@media (max-width: 735px) {
+			padding: 1rem;
+		}
+	}
+
 	span {
 		display: inline-flex;
 		justify-content: center;
