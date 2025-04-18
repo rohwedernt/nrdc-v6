@@ -81,7 +81,7 @@
 /* Mobile breakpoint adjustment */
 @media (max-width: 735px) {
 	.fullscreen-bg {
-    object-position: calc(-12px) center;
+    object-position: calc(-14px) center;
   }
 
   .nav-bar {
