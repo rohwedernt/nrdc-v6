@@ -1,6 +1,6 @@
 <section class="glass-panel">
   <h1 class="text-4xl mb-4 text-end">about</h1>
-		<p class="pt-4 italic text-center md:text-base text-sm">
+		<p class="pt-4 italic md:text-base text-sm">
 			Former developer - part-time process nerd - full-time advocate for teams that work well and care deeply - lifelong believer that the best engineering cultures are the ones that value both high standards and high trust.
 		</p>
 		<p class="pt-4 md:text-lg">

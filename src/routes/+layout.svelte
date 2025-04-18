@@ -60,12 +60,13 @@
 		</button>
 
 		<div class="slide-panel {open ? 'open' : ''}">
+			<code class="inline-code text-xs pb-1">v6.1.1</code>
 			<p class="text-xs">Tech Stack: SvelteKit, TailwindCSS, Vercel</p>
 			<p class="text-xs">Graphics: Leonardo AI</p>
 			<hr class="easter-egg my-1 text-gray-500" />
 			<p class="easter-egg text-xs">
-				Try <code class="inline-code rounded-sm bg-gray-100 px-1">⌘ + ⌥ + N</code>— you didn’t hear
-				it from me
+				Try <code class="inline-code rounded-sm bg-gray-100 px-1">⌘ + ⌥ + N</code> (you didn’t hear
+				it from me)
 			</p>
 		</div>
 	</div>

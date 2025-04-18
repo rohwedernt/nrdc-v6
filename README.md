@@ -1,4 +1,4 @@
-# Nate Rohweder Dot Com - version 6
+# Nate Rohweder Dot Com Version 6
 
 ## 🚀 What Is This?
 
