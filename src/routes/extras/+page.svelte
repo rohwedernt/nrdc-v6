@@ -5,6 +5,7 @@
   <ul class="list-inside pb-6">
 		<li class="text-xl pb-1">– <a href="https://nrdc-v5.vercel.app/" target="_blank" rel="noopener noreferrer">Nate Rohweder Dot Com v5</a></li>
 		<li class="text-xl pb-1">– <a href="https://nrdc-v3.vercel.app/" target="_blank" rel="noopener noreferrer">Nate Rohweder Dot Com v4</a></li>
+		<li class="text-xl pb-1">– <a href="https://naterohwederdotcom.vercel.app/" target="_blank" rel="noopener noreferrer">Nate Rohweder Dot Com v3</a></li>
 		<li class="text-xl pb-1 text-gray-500">– Exercise Challenge (Coming Soon)</li>
     <li class="text-xl pb-1 text-gray-500">– Nutrition Tracker (Coming Soon)</li>
   </ul>
