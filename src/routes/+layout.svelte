@@ -51,32 +51,20 @@
 		top: 2rem;
 		right:2rem;
 		display: flex;
-		gap: 2rem;
+		gap: 3rem;
 		z-index: 2;
+		transition: all 0.3s ease;
 	}
 
 	nav a {
 		color: rgb(30, 30, 30);
 		text-decoration: none;
 		font-size: larger;
-		@media (max-width: 735px) {
-			color: rgb(51, 118, 155);
-		}
 	}
 
 	nav a:hover {
 		text-decoration: underline;
 	}
-
-	.nav-bar {
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
-  display: flex;
-  gap: 3rem;
-  z-index: 2;
-  transition: all 0.3s ease;
-}
 
 /* Mobile breakpoint adjustment */
 @media (max-width: 735px) {
@@ -84,25 +72,20 @@
     object-position: calc(-14px) center;
   }
 
-  .nav-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+  nav {
+		display: flex;
+		flex-direction: column;
+		bottom: 1rem;
+		left: 1rem;
+    justify-content: flex-end; 
+    gap: 2rem;
 
-    padding: .6rem 1rem;
-    justify-content: flex-start; 
-    gap: 1.5rem;
-
-    background: rgb(247, 249, 250);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-		/* border-radius: 0 0 5px 5px; */
-
-    z-index: 999;
+    /* z-index: 999; */
   }
 
-  .fullscreen-bg {
-    margin-top: 3rem; /* push background down slightly on mobile */
-  }
+	nav a {
+		color: rgb(17, 22, 31);
+		font-size: x-large;
+	}
 }
 </style>
