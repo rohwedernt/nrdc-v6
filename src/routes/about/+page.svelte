@@ -1,26 +1,52 @@
-<svelte:head>
-	<title>About</title>
-	<meta name="description" content="About this app" />
-</svelte:head>
+<section class="glass-panel">
+  <h1 class="text-4xl mb-4 text-end">about</h1>
+		<p class="pt-4 italic text-center">
+			Former developer - part-time process nerd - full-time advocate for teams that work well and care deeply - lifelong believer that the best engineering cultures are the ones that value both high standards and high trust.
+		</p>
+		<p class="pt-4 text-lg">
+			I'm a software engineering leader who believes that great teams build great systems—and that good management is about more than just process and delivery. It's about coaching humans to grow, thrive, and do the best work of their lives.
+		</p>
+		<p class="pt-4 text-lg">
+			I've led teams across the stack, coached engineers of all levels through growth, helped rewrite platforms without (completely) breaking everything, worked side by side with product and design teams, overhauled hiring systems and helped organizations find clarity in chaos.
+		</p>
+		<p class="pt-4 text-lg">
+			As our world becomes increasingly automated the most valuable things we can invest in are still deeply human: trust, curiosity, resilience, empathy, thoughtful leadership, and occasionally saying, "That's a weird idea… let's try it."
+		</p>
+		<p class="pt-4 text-lg">
+			Away from the keyboard, I'm often writing and recording music—a passion I've been chasing for over 20 years. I also love cooking elaborate meals just to use my favorite knife and justify caring for my cast iron like it's a member of the family. I am always searching for the next historical fiction to read, because apparently I enjoy stress but prefer it set in the 12th century. I'm married to an incredible partner, part of a wonderfully chaotic extended family, learning Spanish, and always planning the next travel adventure to keep my perspective wide and curiosity sharp.
+		</p>
+</section>
 
-<div class="text-column">
-	<h1>About this app</h1>
+<style>
+.glass-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-	<p>
-		This is a <a href="https://svelte.dev/docs/kit">SvelteKit</a> app. You can make your own by typing
-		the following into your command line and following the prompts:
-	</p>
+	min-width: 80vw;
+  max-width: 80vw;
+  max-height: 80vh;
 
-	<pre>npx sv create</pre>
+  padding: 2rem;
+  margin: auto;
 
-	<p>
-		The page you're looking at is purely static HTML, with no client-side interactivity needed.
-		Because of that, we don't need to load any JavaScript. Try viewing the page's source, or opening
-		the devtools network panel and reloading.
-	</p>
+  color: black;
 
-	<p>
-		The <a href="/sverdle">Sverdle</a> page illustrates SvelteKit's data loading and form handling. Try
-		using it with JavaScript disabled!
-	</p>
-</div>
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 1rem;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  
+}
+
+a {
+  color: black;
+}
+</style>

@@ -1,18 +1,25 @@
 <script>
+	import "../app.css";
 	import backgroundImage from '$lib/images/v6-background.jpg';
+	import { fade } from 'svelte/transition';
+  export let data;
 </script>
 
 <img class="fullscreen-bg" src={backgroundImage} alt="Background" />
 
 <nav>
+	<a href="/">home</a>
 	<a href="/about">about</a>
 	<a href="/contact">contact</a>
-	<a href="/contact">resume</a>
-
 </nav>
 
-<div class="content">
-</div>
+<main>
+	{#key data.url.pathname}
+		<div transition:fade={{ duration: 250 }}>
+			<slot />
+		</div>
+	{/key}
+</main>
 
 <style>
 	html,

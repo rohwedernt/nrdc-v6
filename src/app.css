@@ -30,12 +30,6 @@ body {
 		linear-gradient(180deg, var(--color-bg-0) 0%, var(--color-bg-1) 15%, var(--color-bg-2) 50%);
 }
 
-h1,
-h2,
-p {
-	font-weight: 400;
-}
-
 p {
 	line-height: 1.5;
 }
@@ -51,7 +45,6 @@ a:hover {
 
 h1 {
 	font-size: 2rem;
-	text-align: center;
 }
 
 h2 {
