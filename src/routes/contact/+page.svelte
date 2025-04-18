@@ -2,10 +2,10 @@
   <h1 class="text-4xl mb-4 text-end">contact</h1>
   <div class="flex flex-col items-center">
     <p class="pt-4 text-2xl">
-      <a href="https://www.linkedin.com/in/naterohweder/" target="_blank" rel="noopener noreferrer">Email me</a>
+      <a href="mailto:rohwedernt@gmail.com">Email me</a>
     </p>
     <p class="pt-4 text-2xl">
-      Find me on <a href="https://www.linkedin.com/in/naterohweder/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      find me on <a href="https://www.linkedin.com/in/naterohweder/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     </p>
     <p class="pt-4 text-2xl">
       or on <a href="https://github.com/rohwedernt" target="_blank" rel="noopener noreferrer">GitHub</a>
