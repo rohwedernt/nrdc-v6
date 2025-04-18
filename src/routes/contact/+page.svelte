@@ -1,16 +1,16 @@
 <section class="glass-panel mx-8">
   <h1 class="text-4xl mb-4 text-end">contact</h1>
   <div class="flex flex-col items-center">
-    <p class="pt-4 text-2xl">
+    <p class="pt-4 md:text-2xl text-xl">
       <a href="mailto:rohwedernt@gmail.com">Email me</a>
     </p>
-    <p class="pt-4 text-2xl">
+    <p class="pt-4 md:text-2xl text-xl">
       find me on <a href="https://www.linkedin.com/in/naterohweder/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     </p>
-    <p class="pt-4 text-2xl">
+    <p class="pt-4 md:text-2xl text-xl">
       or on <a href="https://github.com/rohwedernt" target="_blank" rel="noopener noreferrer">GitHub</a>
     </p>
-    <p class="pt-4 text-2xl">
+    <p class="pt-4 md:text-2xl text-xl">
       and <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">here's my resume</a>
     </p>
   </div>
@@ -42,6 +42,11 @@
   display: flex;
   flex-direction: column;
   overflow: auto;
+
+  @media (max-width: 735px) {
+    padding: 0.5rem;
+    min-width: 75vw;
+  }
 }
 
 a {
