@@ -108,7 +108,7 @@
 		height: 100vh;
 		z-index: -1;
 		object-fit: cover;
-		object-position: left center; /* 👈 ensures left side is always visible */
+		object-position: left top;
 	}
 
 	nav {

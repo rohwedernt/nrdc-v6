@@ -2,19 +2,19 @@
 	<h1 class="mb-4 text-end text-4xl">contact</h1>
 	<div class="flex flex-col">
 		<p class="pt-4 text-xl md:text-2xl">
-			<a href="mailto:rohwedernt@gmail.com">Email me</a>,
+			<a href="mailto:rohwedernt@gmail.com">Email me</a>
 		</p>
 		<p class="pt-4 text-xl md:text-2xl">
 			find me on <a
 				href="https://www.linkedin.com/in/naterohweder/"
 				target="_blank"
 				rel="noopener noreferrer">LinkedIn</a
-			>,
+			>
 		</p>
 		<p class="pt-4 text-xl md:text-2xl">
 			or on <a href="https://github.com/rohwedernt" target="_blank" rel="noopener noreferrer"
 				>GitHub</a
-			>,
+			>
 		</p>
 		<p class="pt-4 text-xl md:text-2xl">
 			and <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">here's my resume</a>
