@@ -60,7 +60,7 @@
 		text-decoration: none;
 		font-size: larger;
 		@media (max-width: 735px) {
-			/* color: rgb(244, 244, 244); */
+			color: rgb(51, 118, 155);
 		}
 	}
 
@@ -80,6 +80,10 @@
 
 /* Mobile breakpoint adjustment */
 @media (max-width: 735px) {
+	.fullscreen-bg {
+    object-position: calc(-12px) center;
+  }
+
   .nav-bar {
     position: fixed;
     top: 0;
@@ -90,7 +94,7 @@
     justify-content: flex-start; 
     gap: 1.5rem;
 
-    background: rgb(239, 242, 245);
+    background: rgb(247, 249, 250);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 		/* border-radius: 0 0 5px 5px; */
 
