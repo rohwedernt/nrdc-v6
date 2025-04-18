@@ -3,9 +3,11 @@
 
   <h2 class="text-2xl pb-1">Projects</h2>
   <ul class="list-inside pb-6">
-		<li class="text-xl pb-1">– <a href="https://nrdc-v5.vercel.app/" target="_blank" rel="noopener noreferrer">Nate Rohweder Dot Com v5</a></li>
-		<li class="text-xl pb-1">– <a href="https://nrdc-v3.vercel.app/" target="_blank" rel="noopener noreferrer">Nate Rohweder Dot Com v4</a></li>
-		<li class="text-xl pb-1">– <a href="https://naterohwederdotcom.vercel.app/" target="_blank" rel="noopener noreferrer">Nate Rohweder Dot Com v3</a></li>
+		<li class="text-xl pb-1">– Previous versions of Nate Rohweder Dot Com:
+			<a href="https://nrdc-v5.vercel.app/" target="_blank" rel="noopener noreferrer">v5</a>, 
+			<a href="https://nrdc-v3.vercel.app/" target="_blank" rel="noopener noreferrer">v4</a>, and 
+			<a href="https://naterohwederdotcom.vercel.app/" target="_blank" rel="noopener noreferrer">v3</a>
+		</li>
 		<li class="text-xl pb-1 text-gray-500">– Exercise Challenge (Coming Soon)</li>
     <li class="text-xl pb-1 text-gray-500">– Nutrition Tracker (Coming Soon)</li>
   </ul>
@@ -16,6 +18,8 @@
     <li class="text-xl pb-1">– Play a game of <a href="/sverdle">Sverdle</a></li>
     <li class="text-xl pb-1">– Play a game of <a href="/pong">Pong</a></li>
   </ul>
+
+	<h2 class="pt-1 text-center">more coming soon :)</h2>
 
 </section>
 
