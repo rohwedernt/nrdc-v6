@@ -74,7 +74,7 @@
 		</button>
 
 		<div class="slide-panel {open ? 'open' : ''}">
-			<code class="inline-code pb-1 text-xs">v6.1.2</code>
+			<code class="inline-code pb-1 text-xs">v6.1.3</code>
 			<p class="text-xs">Tech Stack: SvelteKit, TailwindCSS, Vercel</p>
 			<p class="text-xs">Graphics: Leonardo AI</p>
 			<hr class="easter-egg my-1 text-gray-500" />
