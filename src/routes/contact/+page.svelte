@@ -54,4 +54,16 @@
 a {
   color: black;
 }
+
+@media (max-width: 735px) {
+  a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  a:hover {
+    font-weight:500;
+  }
+  }
+
 </style>
