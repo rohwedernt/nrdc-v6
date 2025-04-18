@@ -2,7 +2,7 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
+	<title>NRDC</title>
 	<meta name="description" content="Nate Rohweder Dot Com" />
 </svelte:head>
 

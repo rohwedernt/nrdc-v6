@@ -9,19 +9,27 @@
 	/**
 	 * Trigger secret page of easter eggs
 	 */
-	 function keydown(event: KeyboardEvent) {
+	function keydown(event: KeyboardEvent) {
+		console.log({
+			key: event.key,
+			keyCode: event.keyCode,
+			altKey: event.altKey,
+			shiftKey: event.shiftKey,
+			metaKey: event.metaKey,
+			ctrlKey: event.ctrlKey
+		});
 		const key = event.key.toLowerCase();
-		const isValidKey = key === 'n' || key === 'dead'; // Fallback for international layouts
+		const isValidKey = key === '/' || key === '¿'; // Fallback for intl layouts
 
-		const macCombo = event.metaKey && event.altKey && isValidKey;
-		const winCombo = event.ctrlKey && event.altKey && isValidKey;
+		const macCombo = event.altKey && event.shiftKey && isValidKey;
+		const winCombo = event.altKey && event.shiftKey && isValidKey;
 
 		if (macCombo || winCombo) {
 			event.preventDefault();
-			console.log('✨ Secret shortcut triggered');
+			console.log('✨ shortcut triggered');
 			goto('/extras');
 		}
-	};
+	}
 
 	let open = false;
 </script>
@@ -31,9 +39,9 @@
 <img class="fullscreen-bg" src={backgroundImage} alt="Background" />
 
 <nav>
-	<a href="/">home</a>
-	<a href="/about">about</a>
-	<a href="/contact">contact</a>
+	<a href="/" class:active={data.url.pathname === '/'}>home</a>
+	<a href="/about" class:active={data.url.pathname === '/about'}>about</a>
+	<a href="/contact" class:active={data.url.pathname === '/contact'}>contact</a>
 </nav>
 
 <main>
@@ -44,7 +52,13 @@
 	{/key}
 
 	<div class="slideout-wrapper">
-		<button class="slide-tab" on:click={() => (open = !open)} type="button" aria-expanded={open} aria-label="info-panel">
+		<button
+			class="slide-tab"
+			on:click={() => (open = !open)}
+			type="button"
+			aria-expanded={open}
+			aria-label="info-panel"
+		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				class="chevron {open ? 'rotated' : ''}"
@@ -60,12 +74,12 @@
 		</button>
 
 		<div class="slide-panel {open ? 'open' : ''}">
-			<code class="inline-code text-xs pb-1">v6.1.1</code>
+			<code class="inline-code pb-1 text-xs">v6.1.2</code>
 			<p class="text-xs">Tech Stack: SvelteKit, TailwindCSS, Vercel</p>
 			<p class="text-xs">Graphics: Leonardo AI</p>
 			<hr class="easter-egg my-1 text-gray-500" />
 			<p class="easter-egg text-xs">
-				Try <code class="inline-code rounded-sm bg-gray-100 px-1">⌘ + ⌥ + N</code> (you didn’t hear
+				Try <code class="inline-code rounded-sm bg-gray-100 px-1">⌥ + ⬆ + /</code> (you didn’t hear
 				it from me)
 			</p>
 		</div>
@@ -115,6 +129,12 @@
 
 	nav a:hover {
 		text-decoration: underline;
+		text-underline-offset: 4px;
+	}
+
+	nav a.active {
+		text-decoration: underline;
+		text-underline-offset: 4px;
 	}
 
 	/* Mobile breakpoint adjustment */
