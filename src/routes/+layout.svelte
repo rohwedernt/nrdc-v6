@@ -79,13 +79,11 @@
 		left: 1rem;
     justify-content: flex-end; 
     gap: 2rem;
-
-    /* z-index: 999; */
   }
 
 	nav a {
 		color: rgb(17, 22, 31);
-		font-size: x-large;
+		font-size: xx-large;
 	}
 }
 </style>

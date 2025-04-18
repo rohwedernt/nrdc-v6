@@ -43,6 +43,8 @@
   flex-direction: column;
   overflow: auto;
 
+  z-index: 3;
+
   @media (max-width: 735px) {
     padding: 0.5rem;
     min-width: 75vw;

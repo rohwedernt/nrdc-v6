@@ -43,6 +43,8 @@
   display: flex;
   flex-direction: column;
   overflow: auto;
+
+  z-index: 3;
   
   @media (max-width: 735px) {
     padding: 1rem;
