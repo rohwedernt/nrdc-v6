@@ -1,57 +1,70 @@
-<script lang="ts">
-	import Header from './Header.svelte';
-	import '../app.css';
-
-	let { children } = $props();
+<script>
+	import backgroundImage from '$lib/images/v6-background.jpg';
 </script>
 
-<div class="app">
-	<Header />
+<img class="fullscreen-bg" src={backgroundImage} alt="Background" />
 
-	<main>
-		{@render children()}
-	</main>
+<nav>
+	<a href="/about">about</a>
+	<a href="/contact">contact</a>
+	<a href="/contact">resume</a>
 
-	<footer>
-		<p>
-			visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to learn about SvelteKit
-		</p>
-	</footer>
+</nav>
+
+<div class="content">
 </div>
 
 <style>
-	.app {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+		height: 100%;
 	}
 
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 64rem;
-		margin: 0 auto;
-		box-sizing: border-box;
+	:global(#app),
+	:global(body) {
+		height: 100%;
 	}
 
-	footer {
+	.fullscreen-bg {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		z-index: -1;
+		object-fit: cover;
+		object-position: left center; /* 👈 ensures left side is always visible */
+	}
+
+	nav {
+		position: absolute;
+		top: 2rem;
+		right:2rem;
 		display: flex;
-		flex-direction: column;
-		justify-content: center;
+		gap: 2rem;
+		z-index: 2;
+	}
+
+	nav a {
+		color: rgb(30, 30, 30);
+		text-decoration: none;
+		font-size: larger;
+	}
+
+	nav a:hover {
+		text-decoration: underline;
+	}
+
+	.content {
+		position: relative;
+		z-index: 1;
+		height: 100%;
+		display: flex;
 		align-items: center;
-		padding: 12px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 12px 0;
-		}
+		justify-content: center;
+		color: white;
 	}
 </style>
