@@ -1,25 +1,50 @@
+<script>
+	import { Send, Linkedin, Github, FileUser } from 'lucide-svelte';
+</script>
+
 <section class="glass-panel mx-8">
-	<h1 class="mb-4 text-end text-4xl">contact</h1>
-	<div class="flex flex-col">
-		<p class="pt-4 text-xl md:text-2xl">
-			Send me an
-			<a href="mailto:rohwedernt@gmail.com">email</a>
-		</p>
-		<p class="pt-4 text-xl md:text-2xl">
-			find me on <a
-				href="https://www.linkedin.com/in/naterohweder/"
-				target="_blank"
-				rel="noopener noreferrer">LinkedIn</a
-			>
-		</p>
-		<p class="pt-4 text-xl md:text-2xl">
-			or on <a href="https://github.com/rohwedernt" target="_blank" rel="noopener noreferrer"
-				>GitHub</a
-			>
-		</p>
-		<p class="pt-4 text-xl md:text-2xl">
-			and <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">here's my resume</a>
-		</p>
+	<h1 class="mb-6 text-end text-4xl">contact</h1>
+
+	<div class="grid h-full grid-cols-2 grid-rows-2 text-center">
+		<!-- Top Left -->
+		<a
+			href="mailto:rohwedernt@gmail.com"
+			target="_blank"
+			rel="noopener noreferrer"
+		>
+			<Send size="64" strokeWidth="1" />
+			<p class="mt-2 text-sm text-gray-700">e-mail</p>
+		</a>
+
+		<!-- Top Right -->
+		<a
+			href="https://www.linkedin.com/in/naterohweder/"
+			target="_blank"
+			rel="noopener noreferrer"
+		>
+			<Linkedin size="64" strokeWidth="1" />
+			<p class="mt-2 text-sm text-gray-700">linkedin</p>
+		</a>
+
+		<!-- Bottom Left -->
+		<a
+			href="https://github.com/rohwedernt"
+			target="_blank"
+			rel="noopener noreferrer"
+		>
+			<Github size="64" strokeWidth="1" />
+			<p class="mt-2 text-sm text-gray-700">github</p>
+		</a>
+
+		<!-- Bottom Right -->
+		<a
+			href="/resume.pdf"
+			target="_blank"
+			rel="noopener noreferrer"
+		>
+			<FileUser size="64" strokeWidth="1" />
+			<p class="mt-2 text-sm text-gray-700">resume</p>
+		</a>
 	</div>
 </section>
 
@@ -63,13 +88,18 @@
 	}
 
 	a {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 2rem;
 		color: black;
-		text-decoration: underline;
-		text-decoration-thickness: 1px;
-		text-underline-offset: 2px;
+		border-radius: 20px;
 	}
 
 	a:hover {
-		font-weight: 500;
+		font-weight: 700;
+		text-decoration: none;
+		background-color: rgba(242, 210, 80, .4)
 	}
 </style>
