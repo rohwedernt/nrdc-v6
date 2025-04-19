@@ -1,7 +1,7 @@
 <section class="glass-panel">
 	<h1 class="mb-4 text-end text-4xl">extra stuff</h1>
 
-  <h2 class="text-2xl pb-1">Projects</h2>
+  <h2 class="text-2xl pb-1">Apps & Projects</h2>
   <ul class="list-inside pb-6">
 		<li class="text-xl pb-1">– Previous versions of this site:
 			<a href="https://nrdc-v5.vercel.app/" target="_blank" rel="noopener noreferrer">v5</a>, 
@@ -12,6 +12,11 @@
     <li class="text-xl pb-1 text-gray-500">– Nutrition Tracker (Coming Soon)</li>
   </ul>
 
+	<h2 class="text-2xl pb-1">Music</h2>
+  <ul class="list-inside pb-6">
+    <li class="text-xl pb-1">– <a href="https://rohco.vercel.app/">Rohco</a></li>
+    <li class="text-xl pb-1 text-gray-500">– Nomadic (Coming Soon)</li>
+  </ul>
 
   <h2 class="text-2xl pb-1">Games</h2>
   <ul class="list-inside pb-6">
@@ -55,14 +60,16 @@
 		@media (max-width: 1275px) {
 			min-width: 70vw;
 			max-height: 64vh;
-			top: 37%;
+			top: 50%;
 		}
 
 		@media (max-width: 850px) {
 			padding: 1rem;
-			min-width: 90vw;
+			min-width: 100vw;
 			max-height: 64vh;
 			top: 37%;
+			box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+			border-radius: 0%;
 		}
 	}
 
