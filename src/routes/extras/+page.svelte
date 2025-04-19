@@ -3,7 +3,7 @@
 
   <h2 class="text-2xl pb-1">Projects</h2>
   <ul class="list-inside pb-6">
-		<li class="text-xl pb-1">– Previous versions of Nate Rohweder Dot Com:
+		<li class="text-xl pb-1">– Previous versions of this site:
 			<a href="https://nrdc-v5.vercel.app/" target="_blank" rel="noopener noreferrer">v5</a>, 
 			<a href="https://nrdc-v3.vercel.app/" target="_blank" rel="noopener noreferrer">v4</a>, and 
 			<a href="https://naterohwederdotcom.vercel.app/" target="_blank" rel="noopener noreferrer">v3</a>
@@ -15,11 +15,11 @@
 
   <h2 class="text-2xl pb-1">Games</h2>
   <ul class="list-inside pb-6">
-    <li class="text-xl pb-1">– Play a game of <a href="/sverdle">Sverdle</a></li>
-    <li class="text-xl pb-1">– Play a game of <a href="/pong">Pong</a></li>
+    <li class="text-xl pb-1">– Try your luck at a <a href="/sverdle">suspiciously familiar word game</a></li>
+    <li class="text-xl pb-1">– Face off with a bouncing dot in <a href="/pong">Pong</a></li>
   </ul>
 
-	<h2 class="pt-1 text-center">more coming soon :)</h2>
+	<h2 class="pt-1">more coming soon :)</h2>
 
 </section>
 
@@ -53,7 +53,7 @@
 		z-index: 3;
 
 		@media (max-width: 1275px) {
-			min-width: 75vw;
+			min-width: 70vw;
 			max-height: 64vh;
 			top: 37%;
 		}
