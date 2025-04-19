@@ -23,9 +23,6 @@
     <li class="text-xl pb-1">– Try your luck at a <a href="/sverdle">suspiciously familiar word game</a></li>
     <li class="text-xl pb-1">– Face off with a bouncing dot in <a href="/pong">Pong</a></li>
   </ul>
-
-	<h2 class="pt-1">more coming soon :)</h2>
-
 </section>
 
 <style>
