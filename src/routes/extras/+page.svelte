@@ -30,7 +30,7 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 
-		min-width: 80vw;
+		min-width: 50vw;
 		max-width: 80vw;
 		max-height: 80vh;
 
@@ -52,7 +52,13 @@
 
 		z-index: 3;
 
-		@media (max-width: 735px) {
+		@media (max-width: 1275px) {
+			min-width: 75vw;
+			max-height: 64vh;
+			top: 37%;
+		}
+
+		@media (max-width: 850px) {
 			padding: 1rem;
 			min-width: 90vw;
 			max-height: 64vh;
