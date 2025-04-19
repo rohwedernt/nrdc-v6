@@ -2,7 +2,8 @@
 	<h1 class="mb-4 text-end text-4xl">contact</h1>
 	<div class="flex flex-col">
 		<p class="pt-4 text-xl md:text-2xl">
-			<a href="mailto:rohwedernt@gmail.com">Email me</a>
+			Send me an
+			<a href="mailto:rohwedernt@gmail.com">email</a>
 		</p>
 		<p class="pt-4 text-xl md:text-2xl">
 			find me on <a
