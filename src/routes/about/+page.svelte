@@ -48,9 +48,11 @@
   
   @media (max-width: 735px) {
     padding: 1rem;
-    min-width: 90vw;
-    max-height: 64vh;
-    top: 37%;
+    min-width: 100vw;
+    max-height: 60vh;
+    top: 35%;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    border-radius: 0%;
   }
 }
 </style>

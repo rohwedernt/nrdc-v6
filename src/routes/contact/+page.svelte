@@ -53,9 +53,12 @@
 		z-index: 3;
 
 		@media (max-width: 735px) {
-			padding: 0.5rem;
-			min-width: 75vw;
-			top: 40%;
+			padding: 1rem;
+			min-width: 100vw;
+			max-height: 68vh;
+			top: 33%;
+			box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+			border-radius: 0%;
 		}
 	}
 
@@ -65,6 +68,7 @@
 		text-decoration-thickness: 1px;
 		text-underline-offset: 2px;
 	}
+
 	a:hover {
 		font-weight: 500;
 	}
