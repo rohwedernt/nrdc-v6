@@ -15,7 +15,7 @@
 	<h2 class="text-2xl pb-1">Music</h2>
   <ul class="list-inside pb-6">
     <li class="text-xl pb-1">– <a href="https://rohco.vercel.app/">Rohco</a></li>
-    <li class="text-xl pb-1 text-gray-500">– Nomadic (Coming Soon)</li>
+    <li class="text-xl pb-1">– <a href="https://nomadic-archive.vercel.app/">The Nomadic Archives</a></li>
   </ul>
 
   <h2 class="text-2xl pb-1">Games</h2>
