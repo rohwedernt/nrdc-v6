@@ -50,7 +50,7 @@
     padding: 1rem;
     min-width: 100vw;
     max-height: 60vh;
-    top: 35%;
+    top: 38%;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     border-radius: 0%;
   }
