@@ -104,7 +104,7 @@
 		}}
 	>
 	<div class="flex justify-between w-full">
-		<a class="back" href="/extras">← Back to extras</a>
+		<a class="back pr-8" href="/extras">← Back to extras</a>
 		<a class="how-to-play" href="/sverdle/how-to-play">How to play</a>
 	</div>
 

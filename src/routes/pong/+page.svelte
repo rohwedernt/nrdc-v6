@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
-	import { goto } from '$app/navigation';
 
 	let canvas: HTMLCanvasElement;
 	let ctx: CanvasRenderingContext2D;
@@ -49,9 +48,6 @@
 	function handleKeyDown(e: KeyboardEvent) {
 		if (e.key === 'ArrowUp') upPressed = true;
 		if (e.key === 'ArrowDown') downPressed = true;
-		if (e.key === 'Escape') {
-			goto('/extras');
-		}
 	}
 
 	function handleKeyUp(e: KeyboardEvent) {
@@ -128,9 +124,7 @@
 	}
 </script>
 
-<a class="back" href="/extras">← Back to extras</a>
-
-<canvas bind:this={canvas} {width} {height} class="mx-auto mt-8 rounded border shadow" />
+<canvas bind:this={canvas} {width} {height} class="mx-auto mt-8 rounded border shadow"></canvas>
 
 <style>
 	canvas {
