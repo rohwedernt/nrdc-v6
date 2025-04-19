@@ -36,7 +36,7 @@
 			<p class="text-xs">Graphics: Leonardo AI</p>
 			<hr class="key-command my-1 text-gray-500" />
 			<p class="key-command text-xs">
-				Try <code class="inline-code rounded-sm bg-gray-100 px-1">⌥ + ⬆ + /</code> (you didn’t hear
+				Try <code class="inline-code rounded-sm bg-gray-200/80 px-1">⌥ + ⬆ + /</code> (you didn’t hear
 				it from me)
 			</p>
 		</div>

@@ -44,7 +44,7 @@
 			bottom: 1rem;
 			left: 1rem;
 			justify-content: flex-end;
-			gap: 2rem;
+			gap: 1rem;
 		}
 
 		nav a {
