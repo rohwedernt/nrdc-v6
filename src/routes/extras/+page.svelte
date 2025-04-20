@@ -1,5 +1,15 @@
+<script>
+	import { X } from 'lucide-svelte';
+</script>
+
 <section class="glass-panel">
-	<h1 class="mb-4 text-end text-4xl">extra stuff</h1>
+	<div class="flex justify-between">
+		<a href="/">
+			<X size="36" strokeWidth="1" />
+		</a>
+
+		<h1 class="mb-6 text-end text-4xl">extra stuff</h1>
+	</div>
 
 	<h2 class="pb-1 text-2xl">Apps & Projects</h2>
 	<ul class="list-inside pb-6">
