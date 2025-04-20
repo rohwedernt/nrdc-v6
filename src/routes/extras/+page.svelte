@@ -1,28 +1,35 @@
 <section class="glass-panel">
 	<h1 class="mb-4 text-end text-4xl">extra stuff</h1>
 
-  <h2 class="text-2xl pb-1">Apps & Projects</h2>
-  <ul class="list-inside pb-6">
-		<li class="text-xl pb-1">– Previous versions of this site:
-			<a href="https://nrdc-v5.vercel.app/" target="_blank" rel="noopener noreferrer">v5</a>, 
-			<a href="https://nrdc-v3.vercel.app/" target="_blank" rel="noopener noreferrer">v4</a>, and 
-			<a href="https://naterohwederdotcom.vercel.app/" target="_blank" rel="noopener noreferrer">v3</a>
+	<h2 class="pb-1 text-2xl">Apps & Projects</h2>
+	<ul class="list-inside pb-6">
+		<li class="pb-1 text-xl">
+			– Previous versions of this site:
+			<a href="https://nrdc-v5.vercel.app/" target="_blank" rel="noopener noreferrer">v5</a>,
+			<a href="https://nrdc-v3.vercel.app/" target="_blank" rel="noopener noreferrer">v4</a>, and
+			<a href="https://naterohwederdotcom.vercel.app/" target="_blank" rel="noopener noreferrer"
+				>v3</a
+			>
 		</li>
-		<li class="text-xl pb-1 text-gray-500">– Exercise Challenge (Coming Soon)</li>
-    <li class="text-xl pb-1 text-gray-500">– Nutrition Tracker (Coming Soon)</li>
-  </ul>
+		<li class="pb-1 text-xl text-gray-500">– Exercise Challenge (Coming Soon)</li>
+		<li class="pb-1 text-xl text-gray-500">– Nutrition Tracker (Coming Soon)</li>
+	</ul>
 
-	<h2 class="text-2xl pb-1">Music</h2>
-  <ul class="list-inside pb-6">
-    <li class="text-xl pb-1">– <a href="https://rohco.vercel.app/">Rohco</a></li>
-    <li class="text-xl pb-1">– <a href="https://nomadic-archive.vercel.app/">The Nomadic Archives</a></li>
-  </ul>
+	<h2 class="pb-1 text-2xl">Music</h2>
+	<ul class="list-inside pb-6">
+		<li class="pb-1 text-xl">– <a href="https://rohco.vercel.app/">Rohco</a></li>
+		<li class="pb-1 text-xl">
+			– <a href="https://nomadic-archive.vercel.app/">The Nomadic Archives</a>
+		</li>
+	</ul>
 
-  <h2 class="text-2xl pb-1">Games</h2>
-  <ul class="list-inside pb-6">
-    <li class="text-xl pb-1">– Try your luck at a <a href="/sverdle">suspiciously familiar word game</a></li>
-    <li class="text-xl pb-1">– Face off with a bouncing dot in <a href="/pong">Pong</a></li>
-  </ul>
+	<h2 class="pb-1 text-2xl">Games</h2>
+	<ul class="list-inside pb-6">
+		<li class="pb-1 text-xl">
+			– Try your luck at a <a href="/sverdle">suspiciously familiar word game</a>
+		</li>
+		<li class="pb-1 text-xl">– Face off with a bouncing dot in <a href="/pong">Pong</a></li>
+	</ul>
 </section>
 
 <style>
