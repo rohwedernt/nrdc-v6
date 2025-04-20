@@ -73,9 +73,9 @@
 
 		@media (max-width: 735px) {
 			padding: 1rem;
+			padding-top: 3rem;
 			min-width: 100vw;
 			min-height: 100vh;
-			/* top: 38%; */
 			box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 			border-radius: 0%;
 		}

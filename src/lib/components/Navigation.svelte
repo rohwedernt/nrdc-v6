@@ -51,5 +51,15 @@
 			color: rgb(17, 22, 31);
 			font-size: xx-large;
 		}
+
+		nav a:hover {
+			text-underline-offset: 5px;
+			text-decoration-thickness: 2px;
+		}
+
+		nav a.active {
+			text-underline-offset: 5px;
+			text-decoration-thickness: 2px;
+		}
 	}
 </style>

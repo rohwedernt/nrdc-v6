@@ -69,6 +69,7 @@
 
 		@media (max-width: 735px) {
 			padding: 1rem;
+			padding-top: 3rem;
 			min-width: 100vw;
 			min-height: 100vh;
 			box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
