@@ -11,30 +11,47 @@
 		<h1 class="mb-6 text-end text-4xl">contact</h1>
 	</div>
 
-	<div class="contact-options grid h-full grid-cols-2 grid-rows-2 text-center">
-		<!-- Top Left -->
-		<a href="mailto:rohwedernt@gmail.com" target="_blank" rel="noopener noreferrer">
-			<Send size="64" strokeWidth="1" />
-			<p class="mt-2 text-sm text-gray-700">e-mail</p>
-		</a>
+	<div class="flex w-full flex-grow items-center justify-center">
+		<div class="grid h-full w-full grid-cols-2 grid-rows-2 text-center">
+			<!-- Top Left -->
+			<a
+				class="contact-item"
+				href="mailto:rohwedernt@gmail.com"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<Send size="64" strokeWidth="1" />
+				<p class="mt-2 text-sm text-gray-700">e-mail</p>
+			</a>
 
-		<!-- Top Right -->
-		<a href="https://www.linkedin.com/in/naterohweder/" target="_blank" rel="noopener noreferrer">
-			<Linkedin size="64" strokeWidth="1" />
-			<p class="mt-2 text-sm text-gray-700">linkedin</p>
-		</a>
+			<!-- Top Right -->
+			<a
+				class="contact-item"
+				href="https://www.linkedin.com/in/naterohweder/"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<Linkedin size="64" strokeWidth="1" />
+				<p class="mt-2 text-sm text-gray-700">linkedin</p>
+			</a>
 
-		<!-- Bottom Left -->
-		<a href="https://github.com/rohwedernt" target="_blank" rel="noopener noreferrer">
-			<Github size="64" strokeWidth="1" />
-			<p class="mt-2 text-sm text-gray-700">github</p>
-		</a>
+			<!-- Bottom Left -->
+			<a
+				class="contact-item"
+				href="https://github.com/rohwedernt"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<Github size="64" strokeWidth="1" />
+				<p class="mt-2 text-sm text-gray-700">github</p>
+			</a>
 
-		<!-- Bottom Right -->
-		<a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
-			<FileUser size="64" strokeWidth="1" />
-			<p class="mt-2 text-sm text-gray-700">resume</p>
-		</a>
+			<!-- Bottom Right -->
+			<a class="contact-item" href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+				<FileUser size="64" strokeWidth="1" />
+				<p class="mt-2 text-sm text-gray-700">resume</p>
+			</a>
+		</div>
 	</div>
 </section>
 
@@ -77,21 +94,18 @@
 		}
 	}
 
-	.contact-options {
-		a {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			padding: 2rem;
-			color: black;
-			border-radius: 20px;
-		}
-
-		a:hover {
-			font-weight: 700;
-			text-decoration: none;
-			background-color: rgba(242, 210, 80, 0.4);
-		}
+	.contact-item {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 2rem;
+		color: black;
+		border-radius: 20px;
+	}
+	.contact-item:hover {
+		font-weight: 700;
+		text-decoration: none;
+		background-color: rgba(242, 210, 80, 0.4);
 	}
 </style>
