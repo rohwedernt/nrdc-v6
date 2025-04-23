@@ -14,7 +14,7 @@
 		I’m a software engineering leader who believes in getting useful, meaningful stuff into the hands of actual human beings. When a team feels the impact of what they’re building, they take pride in what they ship—and that’s when the fun really starts. I'm a former developer, process nerd, and lifelong believer that the best engineering cultures are the ones that value both high standards and high trust.
 	</p>
 	<p class="pt-4 md:text-lg">
-		I've led teams across the stack, coached engineers of all levels through growth, helped rewrite
+		Over the past decade I've led teams across the stack, coached engineers of all levels through growth, helped rewrite
 		platforms without (completely) breaking everything, worked side by side with product and design
 		teams, overhauled hiring systems and helped organizations find clarity in chaos.
 	</p>
