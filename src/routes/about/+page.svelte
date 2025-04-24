@@ -11,7 +11,7 @@
 		<h1 class="mb-4 text-end text-4xl">about</h1>
 	</div>
 	<p class="pt-4 md:text-lg">
-		I’m a software engineering leader who believes in getting useful, meaningful stuff into the hands of actual human beings. When a team feels the impact of what they’re building, they take pride in what they ship—and that’s when the fun really starts. I'm a former developer, process nerd, and lifelong believer that the best engineering cultures are the ones that value both high standards and high trust.
+		I’m a software engineering leader who loves to obsess over ways to get awesome, meaningful stuff into the hands of real human beings. When a team feels the impact of what they’re building, they take pride in what they ship—and that’s when the fun starts. I'm a former developer, process nerd, and lifelong believer that the best engineering cultures are the ones that value both high standards and high trust.
 	</p>
 	<p class="pt-4 md:text-lg">
 		Over the past decade I've led teams across the stack, coached engineers of all levels through growth, helped rewrite
@@ -19,7 +19,7 @@
 		teams, overhauled hiring systems and helped organizations find clarity in chaos.
 	</p>
 	<p class="pt-4 md:text-lg">
-		As AI marches steadily toward running our calendars, code, and probably our snack decisions, the most important things we can invest in are still deeply, stubbornly human: trust, curiosity, resilience, empathy, thoughtful leadership—and a willingness to say, “That’s a weird idea… let’s try it,” (before the robots tell us not to).
+		As AI rampages on making a bigger impact on how we get all kinds of things done, the most important stuff we can invest in are still deeply, stubbornly human: trust, curiosity, resilience, empathy, thoughtful leadership—and a willingness to say, “That’s a weird idea… let’s try it,” (before the robots tell us not to).
 	</p>
 	<p class="pt-4 md:text-lg">
 		Away from the keyboard, I'm often writing and recording music—a passion I've been chasing for
