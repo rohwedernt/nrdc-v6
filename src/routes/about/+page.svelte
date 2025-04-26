@@ -19,7 +19,7 @@
 		teams, overhauled hiring systems and helped organizations find clarity in chaos.
 	</p>
 	<p class="pt-4 md:text-lg">
-		As AI rampages on making a bigger impact on how we get all kinds of things done, the most important stuff we can invest in are still deeply, stubbornly human: trust, curiosity, resilience, empathy, thoughtful leadership—and a willingness to say, “That’s a weird idea… let’s try it,” (before the robots tell us not to).
+		As AI makes a bigger and bigger impact on how we get all kinds of things done, the most important stuff we can invest in are still deeply, stubbornly human: trust, curiosity, resilience, empathy, thoughtful leadership—and a willingness to say, “That’s a weird idea… let’s try it,” (before the robots tell us not to).
 	</p>
 	<p class="pt-4 md:text-lg">
 		Away from the keyboard, I'm often writing and recording music—a passion I've been chasing for
