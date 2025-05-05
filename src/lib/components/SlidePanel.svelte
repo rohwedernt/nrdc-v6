@@ -31,7 +31,7 @@
 		</button>
 
 		<div class="slide-panel {open ? 'open' : ''}">
-			<code class="inline-code pb-1 text-xs">v6.1.4</code>
+			<code class="inline-code pb-1 text-xs">v6.1.5</code>
 			<p class="text-xs">Tech Stack: SvelteKit, TailwindCSS, Vercel</p>
 			<p class="text-xs">Graphics: Leonardo AI</p>
 			<hr class="key-command my-1 text-gray-500" />
