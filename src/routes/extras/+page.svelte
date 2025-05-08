@@ -27,9 +27,9 @@
 
 	<h2 class="pb-1 text-2xl">Music</h2>
 	<ul class="list-inside pb-6">
-		<li class="pb-1 text-xl">– <a href="https://rohco.vercel.app/">Rohco</a></li>
+		<li class="pb-1 text-xl">– <a href="https://rohco.vercel.app/" target="_blank" rel="noopener noreferrer">Rohco</a></li>
 		<li class="pb-1 text-xl">
-			– <a href="https://nomadic-archive.vercel.app/">The Nomadic Archives</a>
+			– <a href="https://nomadic-archive.vercel.app/" target="_blank" rel="noopener noreferrer">The Nomadic Archives</a>
 		</li>
 	</ul>
 
