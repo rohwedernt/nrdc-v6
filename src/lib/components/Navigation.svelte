@@ -1,13 +1,21 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import * as m from '$lib/paraglide/messages';
+	import { t, locale } from 'svelte-i18n';
 </script>
 
-<nav>
-  <a href="/" class="nav-link" class:active={$page.url.pathname === '/'} aria-current={$page.url.pathname === '/' ? 'page' : undefined}>{m["nav.home"]()}</a>
-  <a href="/about" class="nav-link" class:active={$page.url.pathname === '/about'} aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>{m["nav.about"]()}</a>
-  <a href="/contact" class="nav-link" class:active={$page.url.pathname === '/contact'} aria-current={$page.url.pathname === '/contact' ? 'page' : undefined}>{m["nav.contact"]()}</a>
-</nav>
+{#if $locale}
+	<nav>
+		<a href="/" class="nav-link" class:active={$page.url.pathname === '/'} aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
+			{$t('nav.home')}
+		</a>
+		<a href="/about" class="nav-link" class:active={$page.url.pathname === '/about'} aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
+			{$t('nav.about')}
+		</a>
+		<a href="/contact" class="nav-link" class:active={$page.url.pathname === '/contact'} aria-current={$page.url.pathname === '/contact' ? 'page' : undefined}>
+			{$t('nav.contact')}
+		</a>
+	</nav>
+{/if}
 
 <style>
   nav {

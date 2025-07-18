@@ -1,0 +1,13 @@
+{
+  "nav.home": "inicio",
+  "nav.about": "acerca de",
+  "nav.contact": "contacto",
+  "slide.techStack": "Tecnologías: SvelteKit, TailwindCSS, Vercel",
+  "slide.graphics": "Gráficos: Leonardo AI",
+  "slide.shortcut": "Prueba ⌥ + ⬆ + / (no me escuchaste decir esto)",
+  "about.title": "acerca de",
+  "about.p1": "Soy un líder de ingeniería de software que se apasiona por encontrar formas de poner cosas increíbles y significativas en manos de personas reales. Cuando un equipo siente el impacto de lo que está construyendo, se enorgullece de lo que entrega—y ahí es cuando comienza la diversión. Soy un ex desarrollador, entusiasta de los procesos, y creyente de toda la vida de que las mejores culturas de ingeniería son las que valoran tanto los altos estándares como la alta confianza.",
+  "about.p2": "Durante la última década, he liderado equipos en toda la pila tecnológica, he guiado a ingenieros de todos los niveles en su crecimiento, he ayudado a reescribir plataformas sin (completamente) romper todo, he trabajado codo a codo con equipos de producto y diseño, he renovado sistemas de contratación y he ayudado a las organizaciones a encontrar claridad en el caos.",
+  "about.p3": "A medida que la IA tiene un impacto cada vez mayor en cómo hacemos todo tipo de cosas, lo más importante en lo que podemos invertir sigue siendo profundamente, obstinadamente humano: confianza, curiosidad, resiliencia, empatía, liderazgo reflexivo—y la disposición a decir, 'Esa es una idea extraña... probémosla,' (antes de que los robots nos digan que no).",
+  "about.p4": "Lejos del teclado, a menudo estoy escribiendo y grabando música—una pasión que he perseguido durante más de 20 años. También me encanta cocinar comidas elaboradas solo para usar mi cuchillo favorito y justificar el cuidado de mi hierro fundido como si fuera un miembro de la familia. Siempre estoy buscando la próxima novela histórica para leer, porque aparentemente disfruto el estrés pero prefiero que esté ambientado en el siglo XII. Estoy casado con una pareja increíble, soy parte de una familia extendida maravillosamente caótica, estoy aprendiendo español, y siempre planeando la próxima aventura de viaje para mantener mi perspectiva amplia y mi curiosidad aguda."
+} 

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation';
+	import { t, locale } from 'svelte-i18n';
 
 	let open = false;
 
@@ -8,6 +9,7 @@
 	});
 </script>
 
+{#if $locale}
 	<div class="slideout-wrapper">
 		<button
 			class="slide-tab"
@@ -32,15 +34,13 @@
 
 		<div class="slide-panel {open ? 'open' : ''}">
 			<code class="inline-code pb-1 text-xs">v6.1.5</code>
-			<p class="text-xs">Tech Stack: SvelteKit, TailwindCSS, Vercel</p>
-			<p class="text-xs">Graphics: Leonardo AI</p>
+			<p class="text-xs">{$t('slide.techStack')}</p>
+			<p class="text-xs">{$t('slide.graphics')}</p>
 			<hr class="key-command my-1 text-gray-500" />
-			<p class="key-command text-xs">
-				Try <code class="inline-code rounded-sm bg-gray-200/80 px-1">⌥ + ⬆ + /</code> (you didn’t hear
-				it from me)
-			</p>
+			<p class="key-command text-xs">{$t('slide.shortcut')}</p>
 		</div>
 	</div>
+{/if}
 
 <style>
 	.slideout-wrapper {

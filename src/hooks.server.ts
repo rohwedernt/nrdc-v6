@@ -1,13 +1,10 @@
 import type { Handle } from '@sveltejs/kit';
-import { paraglideMiddleware } from '$lib/paraglide/server';
 
-const handleParaglide: Handle = ({ event, resolve }) =>
-	paraglideMiddleware(event.request, ({ request, locale }) => {
-		event.request = request;
+export const handle: Handle = async ({ event, resolve }) => {
+	// Ignore requests to browser-extension metadata routes
+	if (event.url.pathname.startsWith('/.well-known/')) {
+		return new Response(null, { status: 204 });
+	}
 
-		return resolve(event, {
-			transformPageChunk: ({ html }) => html.replace('%paraglide.lang%', locale)
-		});
-	});
-
-export const handle: Handle = handleParaglide;
+	return resolve(event);
+};

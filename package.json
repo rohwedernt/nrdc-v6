@@ -11,14 +11,15 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
-		"lint": "prettier --check . && eslint ."
+		"lint": "prettier --check . && eslint .",
+		"postinstall": "vite build"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
 		"@eslint/js": "^9.18.0",
 		"@fontsource/fira-mono": "^5.0.0",
 		"@neoconfetti/svelte": "^2.0.0",
-		"@sveltejs/adapter-vercel": "^5.6.3",
+		"@sveltejs/adapter-vercel": "^5.7.0",
 		"@sveltejs/kit": "^2.16.0",
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
 		"@tailwindcss/typography": "^0.5.15",
@@ -38,8 +39,8 @@
 		"vite": "^6.2.5"
 	},
 	"dependencies": {
-		"@inlang/paraglide-js": "^2.0.0",
-		"lucide-svelte": "^0.501.0"
+		"lucide-svelte": "^0.501.0",
+		"svelte-i18n": "^4.0.1"
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [

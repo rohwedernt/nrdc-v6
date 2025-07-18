@@ -1,5 +1,6 @@
 <script>
 	import { X, Send, Linkedin, Github, FileUser } from 'lucide-svelte';
+	import { t, locale } from 'svelte-i18n';
 </script>
 
 <section class="glass-panel mx-8">
@@ -8,7 +9,7 @@
 			<X size="36" strokeWidth="1" />
 		</a>
 
-		<h1 class="mb-6 text-end text-4xl">contact</h1>
+		<h1 class="mb-6 text-end text-4xl">{$t('nav.contact')}</h1>
 	</div>
 
 	<div class="flex w-full flex-grow items-center justify-center">
