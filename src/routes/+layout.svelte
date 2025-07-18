@@ -17,7 +17,7 @@
 
 <!-- Site-wide navigation -->
 <header>
-	<Navigation {data} />
+	<Navigation />
 </header>
 
 <!-- Main routed content -->
