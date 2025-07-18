@@ -1,65 +1,66 @@
 <script lang="ts">
-	export let data;
+  import { page } from '$app/stores';
+  import * as m from '$lib/paraglide/messages';
 </script>
 
 <nav>
-	<a href="/" class:active={data.url.pathname === '/'}>home</a>
-	<a href="/about" class:active={data.url.pathname === '/about'}>about</a>
-	<a href="/contact" class:active={data.url.pathname === '/contact'}>contact</a>
+  <a href="/" class="nav-link" class:active={$page.url.pathname === '/'} aria-current={$page.url.pathname === '/' ? 'page' : undefined}>{m["nav.home"]()}</a>
+  <a href="/about" class="nav-link" class:active={$page.url.pathname === '/about'} aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>{m["nav.about"]()}</a>
+  <a href="/contact" class="nav-link" class:active={$page.url.pathname === '/contact'} aria-current={$page.url.pathname === '/contact' ? 'page' : undefined}>{m["nav.contact"]()}</a>
 </nav>
 
 <style>
-	nav {
-		position: absolute;
-		top: 2rem;
-		right: 2rem;
-		display: flex;
-		gap: 4rem;
-		z-index: 2;
-		transition: all 0.3s ease;
-	}
+  nav {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    display: flex;
+    gap: 4rem;
+    z-index: 2;
+    transition: all 0.3s ease;
+  }
 
-	nav a {
-		color: rgb(30, 30, 30);
-		text-decoration: none;
-		font-size: larger;
-	}
+  nav a {
+    color: rgb(30, 30, 30);
+    text-decoration: none;
+    font-size: larger;
+  }
 
-	nav a:hover {
-		text-decoration: underline;
-		text-underline-offset: 4px;
-	}
+  nav a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
 
-	nav a.active {
-		text-decoration: underline;
-		text-underline-offset: 4px;
-	}
+  nav a.active {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
 
-	/* Mobile breakpoint adjustment */
-	@media (max-width: 785px) {
-		nav {
-			display: flex;
-			flex-direction: column;
-			width: fit-content;
-			bottom: 1rem;
-			left: 1rem;
-			justify-content: flex-end;
-			gap: 1rem;
-		}
+  /* Mobile breakpoint adjustment */
+  @media (max-width: 785px) {
+    nav {
+      display: flex;
+      flex-direction: column;
+      width: fit-content;
+      bottom: 1rem;
+      left: 1rem;
+      justify-content: flex-end;
+      gap: 1rem;
+    }
 
-		nav a {
-			color: rgb(17, 22, 31);
-			font-size: xx-large;
-		}
+    nav a {
+      color: rgb(17, 22, 31);
+      font-size: xx-large;
+    }
 
-		nav a:hover {
-			text-underline-offset: 5px;
-			text-decoration-thickness: 2px;
-		}
+    nav a:hover {
+      text-underline-offset: 5px;
+      text-decoration-thickness: 2px;
+    }
 
-		nav a.active {
-			text-underline-offset: 5px;
-			text-decoration-thickness: 2px;
-		}
-	}
+    nav a.active {
+      text-underline-offset: 5px;
+      text-decoration-thickness: 2px;
+    }
+  }
 </style>
