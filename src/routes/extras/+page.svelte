@@ -1,5 +1,8 @@
 <script>
 	import { X } from 'lucide-svelte';
+	import { t } from 'svelte-i18n';
+	// @ts-ignore: ignore type error for parameterized translation
+	$: pongLinkHtml = $t('extras.games.pong', { pongLink: '<a href="/pong">Pong</a>' });
 </script>
 
 <section class="glass-panel">
@@ -8,37 +11,39 @@
 			<X size="36" strokeWidth="1" />
 		</a>
 
-		<h1 class="mb-6 text-end text-4xl">extra stuff</h1>
+		<h1 class="mb-6 text-end text-4xl">{$t('extras.title')}</h1>
 	</div>
 
-	<h2 class="pb-1 text-2xl">Apps & Projects</h2>
+	<h2 class="pb-1 text-2xl">{$t('extras.apps')}</h2>
 	<ul class="list-inside pb-6">
 		<li class="pb-1 text-xl">
-			– Previous versions of this site:
+			– {$t('extras.apps.versions')}
 			<a href="https://nrdc-v5.vercel.app/" target="_blank" rel="noopener noreferrer">v5</a>,
 			<a href="https://nrdc-v3.vercel.app/" target="_blank" rel="noopener noreferrer">v4</a>, and
 			<a href="https://naterohwederdotcom.vercel.app/" target="_blank" rel="noopener noreferrer"
 				>v3</a
 			>
 		</li>
-		<li class="pb-1 text-xl text-gray-500">– Exercise Challenge (Coming Soon)</li>
-		<li class="pb-1 text-xl text-gray-500">– Nutrition Tracker (Coming Soon)</li>
+		<li class="pb-1 text-xl text-gray-500">– {$t('extras.apps.exercise')}</li>
+		<li class="pb-1 text-xl text-gray-500">– {$t('extras.apps.nutrition')}</li>
 	</ul>
 
-	<h2 class="pb-1 text-2xl">Music</h2>
+	<h2 class="pb-1 text-2xl">{$t('extras.music')}</h2>
 	<ul class="list-inside pb-6">
-		<li class="pb-1 text-xl">– <a href="https://rohco.vercel.app/" target="_blank" rel="noopener noreferrer">Rohco</a></li>
+		<li class="pb-1 text-xl">– <a href="https://rohco.vercel.app/" target="_blank" rel="noopener noreferrer">{$t('extras.music.rohco')}</a></li>
 		<li class="pb-1 text-xl">
-			– <a href="https://nomadic-archive.vercel.app/" target="_blank" rel="noopener noreferrer">The Nomadic Archives</a>
+			– <a href="https://nomadic-archive.vercel.app/" target="_blank" rel="noopener noreferrer">{$t('extras.music.nomadic')}</a>
 		</li>
 	</ul>
 
-	<h2 class="pb-1 text-2xl">Games</h2>
+	<h2 class="pb-1 text-2xl">{$t('extras.games')}</h2>
 	<ul class="list-inside pb-6">
 		<li class="pb-1 text-xl">
-			– Try your luck at a <a href="/sverdle">suspiciously familiar word game</a>
+			– <a href="/sverdle">{$t('extras.games.sverdle')}</a>
 		</li>
-		<li class="pb-1 text-xl">– Face off with a bouncing dot in <a href="/pong">Pong</a></li>
+		<li class="pb-1 text-xl">
+			– {$t('extras.games.pong')} <a href="/pong">{$t('extras.games.pong.link')}</a>
+		</li>
 	</ul>
 </section>
 

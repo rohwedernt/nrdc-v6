@@ -3,6 +3,9 @@
 	import { confetti } from '@neoconfetti/svelte';
 	import type { ActionData, PageData } from './$types';
 	import { MediaQuery } from 'svelte/reactivity';
+	import { t } from 'svelte-i18n';
+	// @ts-ignore: ignore type error for parameterized translation
+	const answerWasHtml = $derived(() => data.answer ? $t('sverdle.answerWas', { answer: data.answer }) : '');
 
 	interface Props {
 		data: PageData;
@@ -104,8 +107,8 @@
 		}}
 	>
 	<div class="flex justify-between w-full">
-		<a class="back pr-8" href="/extras">← Back to extras</a>
-		<a class="how-to-play" href="/sverdle/how-to-play">How to play</a>
+		<a class="back pr-8" href="/extras">{$t('sverdle.back')}</a>
+		<a class="how-to-play" href="/sverdle/how-to-play">{$t('sverdle.howto')}</a>
 	</div>
 
 		<div class="grid" class:playing={!won} class:bad-guess={form?.badGuess}>
@@ -144,16 +147,16 @@
 		<div class="controls">
 			{#if won || data.answers.length >= 6}
 				{#if !won && data.answer}
-					<p>the answer was "{data.answer}"</p>
+					<p>{@html answerWasHtml}</p>
 				{/if}
 				<button data-key="enter" class="restart selected" formaction="?/restart">
-					{won ? 'you won :)' : `game over :(`} play again?
+					{won ? $t('sverdle.win') : $t('sverdle.lose')}
 				</button>
 			{:else}
 				<div class="keyboard">
-					<button data-key="enter" class:selected={submittable} disabled={!submittable}
-						>enter</button
-					>
+					<button data-key="enter" class:selected={submittable} disabled={!submittable}>
+						{$t('sverdle.enter')}
+					</button>
 
 					<button
 						onclick={update}
@@ -162,7 +165,7 @@
 						name="key"
 						value="backspace"
 					>
-						back
+						{$t('sverdle.backspace')}
 					</button>
 
 					{#each ['qwertyuiop', 'asdfghjkl', 'zxcvbnm'] as row (row)}

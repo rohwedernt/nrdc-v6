@@ -1,6 +1,6 @@
 <script>
 	import { X, Send, Linkedin, Github, FileUser } from 'lucide-svelte';
-	import { t, locale } from 'svelte-i18n';
+	import { t } from 'svelte-i18n';
 </script>
 
 <section class="glass-panel mx-8">
@@ -22,7 +22,7 @@
 				rel="noopener noreferrer"
 			>
 				<Send size="64" strokeWidth="1" />
-				<p class="mt-2 text-sm text-gray-700">e-mail</p>
+				<p class="mt-2 text-sm text-gray-700">{$t('contact.email')}</p>
 			</a>
 
 			<!-- Top Right -->
@@ -33,7 +33,7 @@
 				rel="noopener noreferrer"
 			>
 				<Linkedin size="64" strokeWidth="1" />
-				<p class="mt-2 text-sm text-gray-700">linkedin</p>
+				<p class="mt-2 text-sm text-gray-700">{$t('contact.linkedin')}</p>
 			</a>
 
 			<!-- Bottom Left -->
@@ -44,13 +44,13 @@
 				rel="noopener noreferrer"
 			>
 				<Github size="64" strokeWidth="1" />
-				<p class="mt-2 text-sm text-gray-700">github</p>
+				<p class="mt-2 text-sm text-gray-700">{$t('contact.github')}</p>
 			</a>
 
 			<!-- Bottom Right -->
 			<a class="contact-item" href="/resume.pdf" target="_blank" rel="noopener noreferrer">
 				<FileUser size="64" strokeWidth="1" />
-				<p class="mt-2 text-sm text-gray-700">resume</p>
+				<p class="mt-2 text-sm text-gray-700">{$t('contact.resume')}</p>
 			</a>
 		</div>
 	</div>
@@ -63,7 +63,7 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 
-		min-width: 35vw;
+		min-width: 40vw;
 		max-width: 80vw;
 		max-height: 80vh;
 

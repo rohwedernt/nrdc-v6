@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
+	import { t } from 'svelte-i18n';
 
 	let canvas: HTMLCanvasElement;
 	let ctx: CanvasRenderingContext2D;
@@ -115,12 +116,13 @@
 		// Draw score
 		ctx.fillStyle = '#444';
 		ctx.font = '16px monospace';
-		ctx.fillText(`Score: ${score}`, 10, 20);
+		// @ts-ignore: ignore type error for parameterized translation
+		ctx.fillText($t('pong.score', { score }), 10, 20);
 
 		// Draw exit hint
 		ctx.fillStyle = '#888';
 		ctx.font = '12px monospace';
-		ctx.fillText('esc to exit', width - 100, 20);
+		ctx.fillText($t('pong.exit'), width - 100, 20);
 	}
 </script>
 
