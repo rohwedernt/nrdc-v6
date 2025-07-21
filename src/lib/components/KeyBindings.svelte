@@ -17,7 +17,6 @@
 		 */
 		if (macCombo || winCombo) {
 			event.preventDefault();
-			console.log('✨ shortcut triggered');
 			goto('/extras');
 		}
 
