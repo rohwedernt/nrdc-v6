@@ -4,7 +4,7 @@
 </script>
 
 {#if $locale}
-	<nav>
+	<nav aria-label="Main navigation">
 		<a href="/" class="nav-link" class:active={$page.url.pathname === '/'} aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 			{$t('nav.home')}
 		</a>
