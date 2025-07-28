@@ -1,8 +1,6 @@
 <script>
 	import { X } from 'lucide-svelte';
 	import { t } from 'svelte-i18n';
-	// @ts-ignore: ignore type error for parameterized translation
-	$: pongLinkHtml = $t('extras.games.pong', { pongLink: '<a href="/pong">Pong</a>' });
 </script>
 
 <section class="glass-panel">
