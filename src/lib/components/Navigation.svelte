@@ -5,10 +5,10 @@
 
 {#if $locale}
 	<nav aria-label="Main navigation">
-		<a href="/about" class="nav-link" class:active={page.url.pathname === '/about'} aria-current={page.url.pathname === '/about' ? 'page' : undefined}>
+		<a href="/about" class:active={page.url.pathname === '/about'} aria-current={page.url.pathname === '/about' ? 'page' : undefined}>
 			{$t('nav.about')}
 		</a>
-		<a href="/contact" class="nav-link" class:active={page.url.pathname === '/contact'} aria-current={page.url.pathname === '/contact' ? 'page' : undefined}>
+		<a href="/contact" class:active={page.url.pathname === '/contact'} aria-current={page.url.pathname === '/contact' ? 'page' : undefined}>
 			{$t('nav.contact')}
 		</a>
 	</nav>
