@@ -17,10 +17,10 @@
 <style>
   nav {
     position: absolute;
-    top: 2rem;
+    top: 1rem;
     right: 2rem;
     display: flex;
-    gap: 4rem;
+    gap: 5rem;
     z-index: 2;
     transition: all 0.3s ease;
   }
@@ -28,7 +28,7 @@
   nav a {
     color: rgb(30, 30, 30);
     text-decoration: none;
-    font-size: larger;
+    font-size: x-large;
   }
 
   nav a:hover {
