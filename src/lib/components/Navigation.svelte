@@ -1,14 +1,22 @@
 <script lang="ts">
   import { page } from '$app/state';
 	import { t, locale } from 'svelte-i18n';
+	import { goto } from '$app/navigation';
+
+	function handleNavClick(event: MouseEvent, route: string) {
+		event.preventDefault();
+		const currentPath = page.url.pathname;
+		const targetPath = currentPath === route ? '/' : route;
+		goto(targetPath);
+	}
 </script>
 
 {#if $locale}
 	<nav aria-label="Main navigation">
-		<a href="/about" class:active={page.url.pathname === '/about'} aria-current={page.url.pathname === '/about' ? 'page' : undefined}>
+		<a href="/about" class:active={page.url.pathname === '/about'} aria-current={page.url.pathname === '/about' ? 'page' : undefined} on:click={(e) => handleNavClick(e, '/about')}>
 			{$t('nav.about')}
 		</a>
-		<a href="/contact" class:active={page.url.pathname === '/contact'} aria-current={page.url.pathname === '/contact' ? 'page' : undefined}>
+		<a href="/contact" class:active={page.url.pathname === '/contact'} aria-current={page.url.pathname === '/contact' ? 'page' : undefined} on:click={(e) => handleNavClick(e, '/contact')}>
 			{$t('nav.contact')}
 		</a>
 	</nav>
