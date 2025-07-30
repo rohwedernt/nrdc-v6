@@ -1,17 +1,17 @@
 <script lang="ts">
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
 	import { t, locale } from 'svelte-i18n';
 </script>
 
 {#if $locale}
 	<nav aria-label="Main navigation">
-		<a href="/" class="nav-link" class:active={$page.url.pathname === '/'} aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
+		<a href="/" class="nav-link" class:active={page.url.pathname === '/'} aria-current={page.url.pathname === '/' ? 'page' : undefined}>
 			{$t('nav.home')}
 		</a>
-		<a href="/about" class="nav-link" class:active={$page.url.pathname === '/about'} aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
+		<a href="/about" class="nav-link" class:active={page.url.pathname === '/about'} aria-current={page.url.pathname === '/about' ? 'page' : undefined}>
 			{$t('nav.about')}
 		</a>
-		<a href="/contact" class="nav-link" class:active={$page.url.pathname === '/contact'} aria-current={$page.url.pathname === '/contact' ? 'page' : undefined}>
+		<a href="/contact" class="nav-link" class:active={page.url.pathname === '/contact'} aria-current={page.url.pathname === '/contact' ? 'page' : undefined}>
 			{$t('nav.contact')}
 		</a>
 	</nav>
