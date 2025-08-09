@@ -2,7 +2,7 @@
 	import backgroundImage from '$lib/images/v6-background.jpg';
 </script>
 
-<img class="fullscreen-bg" src={backgroundImage} alt="Background" />
+<img class="fullscreen-bg" src={backgroundImage} alt="" aria-hidden="true" />
 
 <style>
 	.fullscreen-bg {
