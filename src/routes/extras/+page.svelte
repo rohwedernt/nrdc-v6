@@ -22,8 +22,9 @@
 				>v3</a
 			>
 		</li>
-		<li class="pb-1 text-xl text-gray-500">– {$t('extras.apps.exercise')}</li>
-		<li class="pb-1 text-xl text-gray-500">– {$t('extras.apps.nutrition')}</li>
+		<li class="pb-1 text-xl text-gray-600">– {$t('extras.apps.aigateway')}</li>
+		<li class="pb-1 text-xl text-gray-600">– {$t('extras.apps.exercise')}</li>
+		<li class="pb-1 text-xl text-gray-600">– {$t('extras.apps.nutrition')}</li>
 	</ul>
 
 	<h2 class="pb-1 text-2xl">{$t('extras.music')}</h2>
