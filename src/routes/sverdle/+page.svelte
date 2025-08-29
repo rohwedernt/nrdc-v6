@@ -5,7 +5,9 @@
 	import { MediaQuery } from 'svelte/reactivity';
 	import { t } from 'svelte-i18n';
 	// @ts-ignore: ignore type error for parameterized translation
-	const answerWasHtml = $derived(() => data.answer ? $t('sverdle.answerWas', { answer: data.answer }) : '');
+	const answerWasHtml = $derived(() =>
+		data.answer ? $t('sverdle.answerWas', { answer: data.answer }) : ''
+	);
 
 	interface Props {
 		data: PageData;
@@ -106,10 +108,10 @@
 			};
 		}}
 	>
-	<div class="flex justify-between w-full">
-		<a class="back pr-8" href="/extras">{$t('sverdle.back')}</a>
-		<a class="how-to-play" href="/sverdle/how-to-play">{$t('sverdle.howto')}</a>
-	</div>
+		<div class="flex w-full justify-between">
+			<a class="back pr-8" href="/extras">{$t('sverdle.back')}</a>
+			<a class="how-to-play" href="/sverdle/how-to-play">{$t('sverdle.howto')}</a>
+		</div>
 
 		<div class="grid" class:playing={!won} class:bad-guess={form?.badGuess}>
 			{#each Array.from(Array(6).keys()) as row (row)}
@@ -253,7 +255,6 @@
 
 	.back {
 		color: var(--color-text);
-
 	}
 
 	.grid {
