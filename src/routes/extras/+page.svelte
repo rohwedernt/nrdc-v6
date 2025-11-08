@@ -38,7 +38,7 @@
 	<h2 class="pb-1 text-2xl">{$t('extras.games')}</h2>
 	<ul class="list-inside pb-6">
 		<li class="pb-1 text-xl">
-			– <a href="/sverdle">{$t('extras.games.sverdle')}</a>
+			– {$t('extras.games.sverdle')} <a href="/sverdle">{$t('extras.games.sverdle.link')}</a> ({$t('extras.games.wordle')} <a target="_blank" rel="noopener noreferrer" href="https://www.nytimes.com/games/wordle/index.html">{$t('extras.games.wordle.link')}</a>)
 		</li>
 		<li class="pb-1 text-xl">
 			– {$t('extras.games.pong')} <a href="/pong">{$t('extras.games.pong.link')}</a>
