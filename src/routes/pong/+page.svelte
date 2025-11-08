@@ -116,8 +116,7 @@
 		// Draw score
 		ctx.fillStyle = '#444';
 		ctx.font = '16px monospace';
-		// @ts-ignore: ignore type error for parameterized translation
-		ctx.fillText($t('pong.score', { score }), 10, 20);
+		ctx.fillText($t('pong.score') + ' ' + score, 10, 20);
 
 		// Draw exit hint
 		ctx.fillStyle = '#888';
