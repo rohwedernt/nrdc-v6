@@ -14,6 +14,7 @@
 
 	<h2 class="pb-1 text-2xl">{$t('extras.apps')}</h2>
 	<ul class="list-inside pb-6">
+		<li class="pb-1 text-xl text-gray-600">– <a href="https://genai-gateway-eta.vercel.app/">{$t('extras.apps.genaigateway')}</a></li>
 		<li class="pb-1 text-xl">
 			– {$t('extras.apps.versions')}
 			<a href="https://nrdc-v5.vercel.app/" target="_blank" rel="noopener noreferrer">v5</a>,
@@ -22,7 +23,6 @@
 				>v3</a
 			>
 		</li>
-		<li class="pb-1 text-xl text-gray-600">– {$t('extras.apps.aigateway')}</li>
 		<li class="pb-1 text-xl text-gray-600">– {$t('extras.apps.exercise')}</li>
 		<li class="pb-1 text-xl text-gray-600">– {$t('extras.apps.nutrition')}</li>
 	</ul>
