@@ -26,10 +26,8 @@
 		if (event.key === 'Escape') {
 			const path = data.url.pathname;
 
-			if (path === '/pong' || path === '/sverdle') {
+			if (path === '/pong') {
 				goto('/extras');
-			} else if (path === '/sverdle/how-to-play') {
-				goto('/sverdle');
 			} else {
 				goto('/');
 			}

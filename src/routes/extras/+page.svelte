@@ -12,20 +12,6 @@
 		<h1 class="mb-6 text-end text-4xl">{$t('extras.title')}</h1>
 	</div>
 
-	<h2 class="pb-1 text-2xl">{$t('extras.apps')}</h2>
-	<ul class="list-inside pb-6">
-		<li class="pb-1 text-xl text-gray-600">– <a href="https://genai-gateway-eta.vercel.app/">{$t('extras.apps.genaigateway')}</a></li>
-		<li class="pb-1 text-xl">
-			– {$t('extras.apps.versions')}
-			<a href="https://nrdc-v5.vercel.app/" target="_blank" rel="noopener noreferrer">v5</a>,
-			<a href="https://nrdc-v3.vercel.app/" target="_blank" rel="noopener noreferrer">v4</a>, and
-			<a href="https://naterohwederdotcom.vercel.app/" target="_blank" rel="noopener noreferrer"
-				>v3</a
-			>
-		</li>
-		<li class="pb-1 text-xl text-gray-600">– {$t('extras.apps.exercise')}</li>
-		<li class="pb-1 text-xl text-gray-600">– {$t('extras.apps.nutrition')}</li>
-	</ul>
 
 	<h2 class="pb-1 text-2xl">{$t('extras.music')}</h2>
 	<ul class="list-inside pb-6">
@@ -35,15 +21,13 @@
 		</li>
 	</ul>
 
-	<h2 class="pb-1 text-2xl">{$t('extras.games')}</h2>
-	<ul class="list-inside pb-6">
-		<li class="pb-1 text-xl">
-			– {$t('extras.games.sverdle')} <a href="/sverdle">{$t('extras.games.sverdle.link')}</a> ({$t('extras.games.wordle')} <a target="_blank" rel="noopener noreferrer" href="https://www.nytimes.com/games/wordle/index.html">{$t('extras.games.wordle.link')}</a>)
-		</li>
-		<li class="pb-1 text-xl">
-			– {$t('extras.games.pong')} <a href="/pong">{$t('extras.games.pong.link')}</a>
-		</li>
-	</ul>
+	<a href="/pong" class="pong-btn">
+		<div class="pong-screen">
+			<div class="scanlines"></div>
+			<span class="pong-text">PONG</span>
+			<span class="pong-sub">INSERT COIN</span>
+		</div>
+	</a>
 </section>
 
 <style>
@@ -91,14 +75,90 @@
 		}
 	}
 
-	a {
+	a:not(.pong-btn) {
 		color: black;
 		text-decoration: underline;
 		text-decoration-thickness: 1px;
 		text-underline-offset: 2px;
 	}
 
-	a:hover {
+	a:not(.pong-btn):hover {
 		font-weight: 500;
+	}
+
+	.pong-btn {
+		display: block;
+		text-decoration: none;
+		margin-top: auto;
+		padding-top: 1.5rem;
+	}
+
+	.pong-screen {
+		position: relative;
+		background: #0a0a0a;
+		border: 3px solid #333;
+		border-radius: 8px;
+		box-shadow:
+			0 0 0 2px #555,
+			0 0 20px rgba(0, 255, 0, 0.25),
+			inset 0 0 40px rgba(0, 0, 0, 0.8);
+		padding: 1.5rem 2rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.25rem;
+		overflow: hidden;
+		transition: box-shadow 0.15s ease;
+	}
+
+	.pong-btn:hover .pong-screen {
+		box-shadow:
+			0 0 0 2px #888,
+			0 0 35px rgba(0, 255, 0, 0.5),
+			inset 0 0 40px rgba(0, 0, 0, 0.8);
+	}
+
+	.scanlines {
+		position: absolute;
+		inset: 0;
+		background: repeating-linear-gradient(
+			to bottom,
+			transparent,
+			transparent 2px,
+			rgba(0, 0, 0, 0.3) 2px,
+			rgba(0, 0, 0, 0.3) 4px
+		);
+		pointer-events: none;
+		z-index: 1;
+	}
+
+	.pong-text {
+		position: relative;
+		z-index: 2;
+		font-family: 'Courier New', Courier, monospace;
+		font-size: 3.5rem;
+		font-weight: 900;
+		letter-spacing: 0.3em;
+		color: #00ff41;
+		text-shadow:
+			0 0 8px #00ff41,
+			0 0 20px #00ff41,
+			0 0 40px #00cc33;
+	}
+
+	.pong-sub {
+		position: relative;
+		z-index: 2;
+		font-family: 'Courier New', Courier, monospace;
+		font-size: 0.7rem;
+		letter-spacing: 0.4em;
+		color: #00aa2a;
+		text-shadow: 0 0 6px #00aa2a;
+		animation: blink 1.2s step-end infinite;
+	}
+
+	@keyframes blink {
+		0%, 100% { opacity: 1; }
+		50% { opacity: 0; }
 	}
 </style>
