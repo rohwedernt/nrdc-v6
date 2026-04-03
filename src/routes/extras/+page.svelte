@@ -55,7 +55,7 @@
 
 		color: black;
 
-		background: rgba(255, 255, 255, 0.6);
+		background: rgba(255, 255, 255, 0.7);
 		border-radius: 1rem;
 		backdrop-filter: blur(6px);
 		-webkit-backdrop-filter: blur(6px);
