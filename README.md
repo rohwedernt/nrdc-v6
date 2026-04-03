@@ -4,7 +4,7 @@
 
 It's a website.
 
-## 🧪 Tech Stack (a.k.a. the toolbox of chaos)
+## 🧪 Tech Stack
 
 - **SvelteKit** because it's just so great
 - **TailwindCSS** class="how-i-want-it-to-look"
