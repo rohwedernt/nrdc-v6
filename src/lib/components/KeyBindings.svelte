@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { extrasStore } from '$lib/stores/extras';
 	export let data: { url: URL };
 
 	/**
@@ -9,23 +10,30 @@
 		const key = event.key.toLowerCase();
 		const isValidKey = key === '/' || key === '¿'; // Fallback for intl layouts
 
-		const macCombo = event.altKey && event.shiftKey && isValidKey;
-		const winCombo = event.altKey && event.shiftKey && isValidKey;
+		const combo = event.altKey && event.shiftKey && isValidKey;
 
 		/**
-		 * Trigger extras page
+		 * Trigger extras: open modal on /theme, navigate otherwise
 		 */
-		if (macCombo || winCombo) {
+		if (combo) {
 			event.preventDefault();
 			goto('/extras');
 		}
 
 		/**
-		 * Escape key returns to home or exits games
+		 * Escape key: close extras modal layers first, then navigate
 		 */
 		if (event.key === 'Escape') {
-			const path = data.url.pathname;
+			if ($extrasStore.showPong) {
+				extrasStore.closePong();
+				return;
+			}
+			if ($extrasStore.open) {
+				extrasStore.closeExtras();
+				return;
+			}
 
+			const path = data.url.pathname;
 			if (path === '/pong') {
 				goto('/extras');
 			} else {

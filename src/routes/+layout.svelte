@@ -5,6 +5,7 @@
 	import SlidePanel from '$lib/components/SlidePanel.svelte';
 	import Navigation from '$lib/components/Navigation.svelte';
 	import BackgroundImage from '$lib/components/BackgroundImage.svelte';
+	import LanguageToggle from '$lib/components/LanguageToggle.svelte';
 
 	export let data;
 </script>
@@ -31,6 +32,9 @@
 
 <!-- Footer-style panel (non-main accessory) -->
 <SlidePanel />
+
+<!-- Language toggle (always visible) -->
+<LanguageToggle />
 
 <style>
 	:global(#app),
