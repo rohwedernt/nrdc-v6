@@ -2,15 +2,14 @@
 
 ## 🚀 What Is This?
 
-It's a website. It's fast.
+It's a website.
 
 ## 🧪 Tech Stack (a.k.a. the toolbox of chaos)
 
-- **SvelteKit** because, omg, it's just so great
-- **TailwindCSS** class="duh"
-- **Leonardo AI** to conjure graphics from the void via generative sorcery
+- **SvelteKit** because it's just so great
+- **TailwindCSS** class="how-i-want-it-to-look"
 - **Vercel** because..
-- **Canvas Pong** hidden in there somewhere
+- **Pong** hidden in there somewhere
 
 ## 🕹 How to Use It
 
