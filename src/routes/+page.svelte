@@ -546,14 +546,17 @@
 	}
 
 	/* ── Responsive ── */
+	@media (max-width: 785px) {
+		.orb-btn {
+			bottom: 1rem;
+			left: unset;
+			right: 1.5rem;
+		}
+	}
+
 	@media (max-width: 480px) {
 		.input-row {
 			flex-direction: column;
-		}
-
-		.orb-btn {
-			bottom: 1rem;
-			left: 1rem;
 		}
 	}
 </style>
