@@ -59,6 +59,7 @@
 
 	function closePrompt() {
 		promptOpen = false;
+		themeInput = '';
 		if (status === 'loading') cancel();
 		if (status === 'error') status = 'idle';
 	}
