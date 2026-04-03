@@ -3,7 +3,7 @@
   "nav.about": "about",
   "nav.contact": "contact",
   "slide.techStack": "Tech Stack: SvelteKit, TailwindCSS, Vercel",
-  "slide.graphics": "Graphics: Leonardo AI",
+  "slide.graphics": "Graphics: Leonardo AI, Unsplash API",
   "slide.shortcut": "Try ⌥ + ⬆ + / (you didn't hear it from me)",
   "about.title": "about",
   "about.p1": "I'm a software engineering leader who loves to obsess over ways to get awesome, meaningful stuff into user's hands. When engineering teams can connect with the impact of what they're building, they can take pride in what they ship and that's when the fun really starts. I'm a former developer, process nerd, and lifelong believer that the best engineering cultures are the ones that value both high standards and high trust.",
@@ -22,5 +22,13 @@
   "contact.email": "e-mail",
   "contact.linkedin": "linkedin",
   "contact.github": "github",
-  "contact.resume": "resume"
+  "contact.resume": "resume",
+  "theme.headline": "Make it yours.",
+  "theme.subheadline": "Describe a vibe and watch the site transform around it",
+  "theme.placeholder": "outer space, neon city...",
+  "theme.generate": "Generate",
+  "theme.skip": "Cancel generation",
+  "theme.loading": "Designing your experience…",
+  "theme.redesign": "← Redesign",
+  "theme.error": "Something went wrong — want to try again?"
 } 

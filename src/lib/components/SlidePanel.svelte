@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation';
+	import { page } from '$app/stores';
 	import { t, locale } from 'svelte-i18n';
 
 	let open = false;
@@ -33,7 +34,7 @@
 		</button>
 
 		<div class="slide-panel {open ? 'open' : ''}">
-			<code class="inline-code pb-1 text-xs">v6.1.5</code>
+			<code class="inline-code pb-1 text-xs">v7.0.1</code>
 			<p class="text-xs">{$t('slide.techStack')}</p>
 			<p class="text-xs">{$t('slide.graphics')}</p>
 			<hr class="key-command my-1 text-gray-500" />

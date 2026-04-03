@@ -3,7 +3,7 @@
   "nav.about": "acerca de",
   "nav.contact": "contacto",
   "slide.techStack": "Tecnologías: SvelteKit, TailwindCSS, Vercel",
-  "slide.graphics": "Gráficos: Leonardo AI",
+  "slide.graphics": "Gráficos: Leonardo AI, Unsplash API",
   "slide.shortcut": "Prueba ⌥ + ⬆ + / (no me escuchaste decir esto)",
   "about.title": "acerca de",
   "about.p1": "Soy un líder en ingeniería de software apasionado por encontrar formas de poner cosas increíbles y significativas en manos de las personas usuarias. Cuando los equipos de ingeniería se conectan con el impacto de lo que están construyendo, sienten orgullo por lo que entregan—y ahí es cuando empieza lo bueno. Fui desarrollador, soy un entusiasta de los procesos y creo firmemente que las mejores culturas de ingeniería valoran tanto los altos estándares como la confianza mutua.",
@@ -22,5 +22,13 @@
   "contact.email": "correo electrónico",
   "contact.linkedin": "linkedin",
   "contact.github": "github",
-  "contact.resume": "currículum"
+  "contact.resume": "currículum",
+  "theme.headline": "Hazlo tuyo.",
+  "theme.subheadline": "Describe una vibra y mira cómo todo el sitio se transforma a su alrededor.",
+  "theme.placeholder": "espacio exterior, cabaña acogedora, ciudad neón…",
+  "theme.generate": "Generar",
+  "theme.skip": "Cancelar generación",
+  "theme.loading": "Diseñando tu experiencia…",
+  "theme.redesign": "← Rediseñar",
+  "theme.error": "Algo salió mal — ¿quieres intentarlo de nuevo?"
 }

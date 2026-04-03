@@ -1,7 +1,7 @@
 {
 	"name": "nrdc-v6",
 	"private": true,
-	"version": "6.1.5",
+	"version": "7.0.1",
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
@@ -39,6 +39,7 @@
 		"vite": "^6.2.5"
 	},
 	"dependencies": {
+		"@anthropic-ai/sdk": "^0.80.0",
 		"lucide-svelte": "^0.501.0",
 		"svelte-i18n": "^4.0.1"
 	},
