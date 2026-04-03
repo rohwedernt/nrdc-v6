@@ -393,7 +393,7 @@
 
 	.subheadline {
 		font-size: 0.875rem;
-		color: #666;
+		color: #292929;
 		margin: 0;
 		line-height: 1.5;
 	}

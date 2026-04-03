@@ -3,6 +3,8 @@
 	import { t } from 'svelte-i18n';
 </script>
 
+<div class="backdrop" aria-hidden="true"></div>
+
 <section class="glass-panel">
 	<div class="flex justify-between">
 		<a href="/">
@@ -31,6 +33,13 @@
 </section>
 
 <style>
+	.backdrop {
+		position: fixed;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.5);
+		z-index: 1;
+	}
+
 	.glass-panel {
 		position: fixed;
 		top: 50%;
@@ -46,7 +55,7 @@
 
 		color: black;
 
-		background: rgba(255, 255, 255, 0.75);
+		background: rgba(255, 255, 255, 0.6);
 		border-radius: 1rem;
 		backdrop-filter: blur(6px);
 		-webkit-backdrop-filter: blur(6px);
@@ -91,11 +100,13 @@
 		text-decoration: none;
 		margin-top: auto;
 		padding-top: 1.5rem;
+		padding-left: 2rem;
+		padding-right: 2rem;
 	}
 
 	.pong-screen {
 		position: relative;
-		background: #0a0a0a;
+		background: #353535;
 		border: 3px solid #333;
 		border-radius: 8px;
 		box-shadow:

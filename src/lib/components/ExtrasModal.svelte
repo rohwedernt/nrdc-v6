@@ -133,7 +133,7 @@
 
 	.pong-screen {
 		position: relative;
-		background: #0a0a0a;
+		background: #353535;
 		border: 3px solid #333;
 		border-radius: 8px;
 		box-shadow:
