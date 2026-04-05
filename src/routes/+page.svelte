@@ -37,6 +37,7 @@
 				html += decoder.decode(value, { stream: true });
 			}
 			html = html.trim().replace(/^```(?:html)?\n?/i, '').replace(/\n?```$/i, '');
+			if (!html.includes('</html>')) throw new Error('Truncated response');
 			generatedHtml = html;
 			status = 'done';
 		} catch (err) {

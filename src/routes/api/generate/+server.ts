@@ -331,15 +331,17 @@ export const POST: RequestHandler = async ({ request }) => {
 	// from issuing a 504 while Claude is still generating the document.
 	const claudeStream = client.messages.stream({
 		model: 'claude-sonnet-4-6',
-		max_tokens: 8000,
+		max_tokens: 4500,
 		system:
 			'You are a creative web designer who builds visually exciting, theme-driven portfolio pages. ' +
-			'Keep total output under 14,000 characters. Use CSS custom properties for the color palette. ' +
+			'Keep total output under 8,000 characters. Be concise with CSS — use shorthand properties and avoid redundancy. ' +
+			'Limit SVGs to one or two simple shapes; do not generate large intricate paths. ' +
+			'Use CSS custom properties for the color palette. ' +
 			(primary
 				? 'Real photos are provided — use them as CSS background-image or <img> src values. ' +
 				  'Layer color overlays over hero images so text stays legible. '
 				: '') +
-			'SVGs should be bold and expressive — geometric patterns, decorative motifs, intricate line art — ' +
+			'SVGs should be bold and expressive — geometric patterns or decorative motifs — ' +
 			'NOT naturalistic clip-art illustrations or solid opaque rectangles. ' +
 			'A complete, polished document is more valuable than unfinished SVG complexity.',
 		messages: [
