@@ -1,10 +1,14 @@
-import { json, error } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import Anthropic from '@anthropic-ai/sdk';
 import type { RequestHandler } from './$types';
 import { ANTHROPIC_API_KEY, UNSPLASH_ACCESS_KEY } from '$env/static/private';
 import en from '../../../locales/en.json';
 
 export const prerender = false;
+
+// Increase Vercel serverless function timeout to the Hobby plan maximum.
+// The default (10 s) is far too short for Claude to generate a full HTML document.
+export const config = { maxDuration: 60 };
 
 const CONTACT = {
 	email: 'nrohweder@gmail.com',
@@ -322,8 +326,10 @@ export const POST: RequestHandler = async ({ request }) => {
 		}
 	}
 
-	// Step 3: Generate full HTML with images injected into prompt
-	const message = await client.messages.create({
+	// Step 3: Stream the full HTML with images injected into the prompt.
+	// Streaming sends response headers immediately, which prevents Vercel's gateway
+	// from issuing a 504 while Claude is still generating the document.
+	const claudeStream = client.messages.stream({
 		model: 'claude-sonnet-4-6',
 		max_tokens: 8000,
 		system:
@@ -344,14 +350,31 @@ export const POST: RequestHandler = async ({ request }) => {
 		]
 	});
 
-	const block = message.content[0];
-	if (block.type !== 'text') {
-		throw error(500, 'Unexpected response from Claude');
-	}
+	const encoder = new TextEncoder();
+	const readable = new ReadableStream({
+		async start(controller) {
+			try {
+				for await (const event of claudeStream) {
+					if (event.type === 'content_block_delta' && event.delta.type === 'text_delta') {
+						controller.enqueue(encoder.encode(event.delta.text));
+					}
+				}
+			} catch (err) {
+				controller.error(err);
+				return;
+			}
+			controller.close();
+		},
+		cancel() {
+			claudeStream.abort();
+		}
+	});
 
-	// Strip markdown code fences if Claude wrapped the output
-	let html = block.text.trim();
-	html = html.replace(/^```(?:html)?\n?/i, '').replace(/\n?```$/i, '');
-
-	return json({ html });
+	return new Response(readable, {
+		headers: {
+			'Content-Type': 'text/plain; charset=utf-8',
+			'X-Content-Type-Options': 'nosniff',
+			'Cache-Control': 'no-store'
+		}
+	});
 };

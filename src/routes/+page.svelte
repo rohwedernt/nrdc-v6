@@ -26,8 +26,18 @@
 				signal: controller.signal
 			});
 			if (!res.ok) throw new Error(`HTTP ${res.status}`);
-			const data = await res.json();
-			generatedHtml = data.html;
+
+			// Read the streamed HTML response chunk by chunk
+			const reader = res.body!.getReader();
+			const decoder = new TextDecoder();
+			let html = '';
+			while (true) {
+				const { done, value } = await reader.read();
+				if (done) break;
+				html += decoder.decode(value, { stream: true });
+			}
+			html = html.trim().replace(/^```(?:html)?\n?/i, '').replace(/\n?```$/i, '');
+			generatedHtml = html;
 			status = 'done';
 		} catch (err) {
 			if (err instanceof Error && err.name === 'AbortError') {
