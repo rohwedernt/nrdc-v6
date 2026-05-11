@@ -140,7 +140,10 @@
 			{#if status === 'error'}
 				<p class="error-msg">{$t('theme.error')}</p>
 			{/if}
-			<h2 class="headline">{$t('theme.headline')}</h2>
+			<div class="headline-row">
+				<h2 class="headline">{$t('theme.headline')}</h2>
+				<span class="beta-badge">beta</span>
+			</div>
 			<p class="subheadline">{$t('theme.subheadline')}</p>
 			<div class="input-row">
 				<input
@@ -391,6 +394,27 @@
 	.btn-close:hover {
 		background: rgba(0, 0, 0, 0.08);
 		color: #111;
+	}
+
+	.headline-row {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.beta-badge {
+		font-size: 0.625rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: #fff;
+		background: rgba(0, 0, 0, 0.55);
+		border: 1px solid rgba(0, 0, 0, 0.15);
+		border-radius: 0.3rem;
+		padding: 0.2em 0.45em;
+		line-height: 1;
+		align-self: center;
+		margin-top: 0.1rem;
 	}
 
 	.headline {
