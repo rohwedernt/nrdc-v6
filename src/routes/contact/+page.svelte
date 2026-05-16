@@ -101,12 +101,68 @@
 		justify-content: center;
 		align-items: center;
 		padding: 2rem;
-		color: black;
+		color: rgba(20, 20, 20, 0.8);
 		border-radius: 20px;
+		border: 1px solid transparent;
+		background: transparent;
+		position: relative;
+		overflow: hidden;
+		cursor: pointer;
+		transition:
+			transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+			box-shadow 0.3s ease,
+			background-color 0.25s ease,
+			color 0.2s ease,
+			border-color 0.25s ease;
 	}
+
+	/* Diagonal light sweep on hover */
+	.contact-item::before {
+		content: '';
+		position: absolute;
+		top: -100%;
+		left: -75%;
+		width: 50%;
+		height: 300%;
+		background: linear-gradient(
+			105deg,
+			transparent 40%,
+			rgba(255, 255, 255, 0.18) 50%,
+			transparent 60%
+		);
+		transition: left 0.55s ease;
+		pointer-events: none;
+	}
+
+	.contact-item:hover::before {
+		left: 150%;
+	}
+
 	.contact-item:hover {
-		font-weight: 700;
 		text-decoration: none;
-		background-color: rgba(242, 210, 80, 0.6);
+		background-color: #33759a;
+		color: white;
+		transform: translateY(-8px) scale(1.03);
+		box-shadow:
+			0 24px 48px rgba(42, 100, 138, 0.5),
+			0 8px 20px rgba(30, 80, 110, 0.3),
+			inset 0 1px 0 rgba(255, 255, 255, 0.2);
+		border-color: rgba(255, 255, 255, 0.2);
+	}
+
+	.contact-item p {
+		transition: color 0.2s ease;
+	}
+
+	.contact-item:hover p {
+		color: white;
+	}
+
+	.contact-item :global(svg) {
+		transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+	}
+
+	.contact-item:hover :global(svg) {
+		transform: translateY(-5px) scale(1.15);
 	}
 </style>
