@@ -22,13 +22,8 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 
-		min-width: 35vw;
-		max-width: 80vw;
-		max-height: 80vh;
-
-		display: flex;
-		align-items: center;
-		justify-content: center;
+		width: 75vw;
+		max-height: 90vh;
 
 		z-index: 3;
 	}

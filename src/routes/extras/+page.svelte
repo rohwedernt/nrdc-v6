@@ -23,6 +23,13 @@
 
 	<a href="/pong" class="pong-btn">
 		<div class="pong-screen">
+			<div class="mini-pong" aria-hidden="true">
+				<div class="mini-scanlines"></div>
+				<div class="mini-net"></div>
+				<div class="mini-ball"></div>
+				<div class="mini-paddle mini-paddle-left"></div>
+				<div class="mini-paddle mini-paddle-right"></div>
+			</div>
 			<div class="scanlines"></div>
 			<span class="pong-text">PONG</span>
 			<span class="pong-sub">INSERT COIN</span>
@@ -162,5 +169,101 @@
 	@keyframes blink {
 		0%, 100% { opacity: 1; }
 		50% { opacity: 0; }
+	}
+
+	/* ── Mini pong (hover) ── */
+	.mini-pong {
+		position: absolute;
+		inset: 0;
+		background: #2a2a2a;
+		opacity: 0;
+		transition: opacity 0.3s ease;
+		pointer-events: none;
+		z-index: 3;
+	}
+
+	.pong-btn:hover .mini-pong {
+		opacity: 1;
+	}
+
+	.mini-scanlines {
+		position: absolute;
+		inset: 0;
+		background: repeating-linear-gradient(
+			to bottom,
+			transparent,
+			transparent 2px,
+			rgba(0, 0, 0, 0.25) 2px,
+			rgba(0, 0, 0, 0.25) 4px
+		);
+		pointer-events: none;
+		z-index: 5;
+	}
+
+	.mini-net {
+		position: absolute;
+		left: 50%;
+		top: 0;
+		bottom: 0;
+		width: 2px;
+		transform: translateX(-50%);
+		background: repeating-linear-gradient(
+			to bottom,
+			rgba(0, 255, 65, 0.5) 0px,
+			rgba(0, 255, 65, 0.5) 8px,
+			transparent 8px,
+			transparent 16px
+		);
+		z-index: 2;
+	}
+
+	.mini-ball {
+		position: absolute;
+		width: 7px;
+		height: 7px;
+		background: #00ff41;
+		border-radius: 50%;
+		box-shadow: 0 0 6px #00ff41, 0 0 14px #00cc33;
+		z-index: 4;
+		animation:
+			mini-ball-x 1.35s linear infinite alternate,
+			mini-ball-y 0.78s linear infinite alternate;
+	}
+
+	.mini-paddle {
+		position: absolute;
+		width: 5px;
+		height: 28px;
+		background: #00ff41;
+		border-radius: 3px;
+		box-shadow: 0 0 5px #00ff41;
+		z-index: 4;
+	}
+
+	.mini-paddle-left {
+		left: 10px;
+		animation: mini-paddle-y 0.78s ease-in-out infinite alternate;
+		animation-delay: -0.1s;
+	}
+
+	.mini-paddle-right {
+		right: 10px;
+		animation: mini-paddle-y 0.78s ease-in-out infinite alternate-reverse;
+		animation-delay: -0.05s;
+	}
+
+	@keyframes mini-ball-x {
+		from { left: 22px; }
+		to { left: calc(100% - 29px); }
+	}
+
+	@keyframes mini-ball-y {
+		from { top: 10px; }
+		to { top: calc(100% - 17px); }
+	}
+
+	@keyframes mini-paddle-y {
+		from { top: 8px; }
+		to { top: calc(100% - 36px); }
 	}
 </style>
