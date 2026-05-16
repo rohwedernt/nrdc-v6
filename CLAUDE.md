@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Personal portfolio website (v6) for Nate Rohweder, built with SvelteKit and deployed on Vercel. Features a minimalist design with a full-screen background, interactive Pong game, an AI-powered theme generator, and a hidden "extras" page accessible via keyboard shortcut.
+Personal portfolio website (v6) for Nate Rohweder, built with SvelteKit and deployed on Vercel. Features a minimalist design with a full-screen background, an AI-powered theme generator, an interactive Pong game, and a hidden "extras" page.
 
 ## Commands
 
@@ -20,38 +20,64 @@ pnpm run format       # Format with Prettier
 
 No test suite is configured.
 
+## Environment Variables
+
+```
+ANTHROPIC_API_KEY=    # Required — powers the theme generator
+UNSPLASH_ACCESS_KEY=  # Optional — adds real photos to generated themes; degrades gracefully without it
+```
+
 ## Architecture
 
 **Stack:** SvelteKit 2 + Svelte 5, TypeScript, TailwindCSS 4, Vercel adapter
 
-**Routing:** File-based SvelteKit routing under `src/routes/`. Most pages use `export const prerender = true` and disable CSR in production (`export const csr = dev`). The `/theme` route is an exception — it sets `export const ssr = false` and is not prerendered.
-
-**Global layout (`src/routes/+layout.svelte`)** wraps all pages with four persistent components:
+**Global layout (`src/routes/+layout.svelte`)** wraps all pages with five persistent components:
 - `BackgroundImage` — full-screen hero image (z-index: -1)
-- `KeyBindings` — global keyboard listener (`Alt+Shift+/` → `/extras`, `Escape` → home)
-- `Navigation` — top-right nav with About/Contact links; clicking the active route navigates home
-- `SlidePanel` — bottom slide-up panel showing tech stack/version info
+- `KeyBindings` — global keyboard listener (see Keyboard shortcuts below)
+- `Navigation` — top-right nav (About/Contact); clicking the active route navigates home
+- `SlidePanel` — bottom center slide-up tab showing tech stack info
+- `LanguageToggle` — bottom-right EN/ES switcher
 
-The layout's `+layout.ts` passes `data.url.pathname` to all pages, used by Navigation and KeyBindings for active state.
+The layout's `+layout.ts` passes `url` to all pages. `Navigation` reads `page.url.pathname` from `$app/state` (Svelte 5 runes API) for active-state highlighting.
 
-**Page pattern:** Most content pages (About, Contact, Extras, Pong) render as a fixed, centered glass-panel modal (`position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%)`) over the background. They include a close button (X icon) that navigates to `/`.
-
-**i18n:** `svelte-i18n` with English (`src/locales/en.json`) and Spanish (`src/locales/es.json`). Initialized in `src/lib/i18n.js`; browser locale auto-detected with English fallback.
+**Page rendering pattern:** Most content pages (`/about`, `/contact`, `/extras`) use `export const prerender = true` and `export const csr = dev` in their `+page.ts`. The root `/` sets `export const ssr = false` and is not prerendered. Pages render as fixed, centered glass-panel modals over the background image.
 
 **Routes:**
-- `/` — landing page; on mount, redirects to `/theme` unless the user has already skipped it (checked via `themeStore`)
-- `/theme` — AI theme generator; prompts user to describe a vibe, calls `/api/generate`, renders result in a full-screen iframe; "skip" sets `themeStore` status to `'skipped'` and navigates to `/`
-- `/about` — biography
-- `/contact` — grid of links (email, LinkedIn, GitHub, resume)
-- `/extras` — hidden page (music links + Pong entry); reachable via `Alt+Shift+/`
-- `/pong` — canvas-based Pong game
+- `/` — the AI theme generator (orb button → prompt card → loading → full-screen iframe result); `ExtrasModal` overlays on top of a generated theme when `extrasStore.open` is true
+- `/about` — biography (glass-panel modal, prerendered)
+- `/contact` — grid of links: email, LinkedIn, GitHub, resume (glass-panel modal, prerendered)
+- `/extras` — hidden page with music links and Pong entry (glass-panel modal, prerendered); reachable via `Alt+Shift+/`
+- `/pong` — canvas-based Pong game; Escape exits back to `/extras`
 - `/home` — 307 redirect to `/`
 
-**AI theme generation** (`src/routes/api/generate/+server.ts`): POST endpoint that accepts `{ theme, locale }`, calls the Anthropic API (`claude-sonnet-4-6`) to generate a `<style>` block, injects it into an HTML scaffold built from i18n strings, and returns `{ html }`. Requires `ANTHROPIC_API_KEY` env var. The scaffold mirrors the site's About/Contact content so the themed preview looks like a real portfolio page.
+**Keyboard shortcuts** (handled in `KeyBindings.svelte`):
+- `Alt+Shift+/` (or `⌥+⬆+/`, also `¿` for international layouts) → navigates to `/extras`
+- `Escape` → closes Pong if open in extras modal → closes extras modal → navigates to `/extras` from `/pong` → otherwise navigates to `/`
 
-**Theme store** (`src/lib/stores/theme.ts`): Svelte writable store tracking theme generation state (`initial | skipped | generating | generated | error`). Used by `/` to gate the redirect and by `ThemePrompt.svelte` to drive UI state. Note: `ThemePrompt.svelte` (`src/lib/components/`) is a component-based variant of the theme UI — the canonical page implementation lives at `src/routes/theme/+page.svelte`.
+## State Management
 
-**Server hook** (`src/hooks.server.ts`): returns 204 for `/.well-known/*` requests (browser extension metadata).
+**`extrasStore`** (`src/lib/stores/extras.ts`) is the only Svelte store. It tracks whether the `ExtrasModal` overlay is open and whether Pong is active within it. This modal is only relevant on the homepage when a theme has been generated — it renders `ExtrasModal.svelte` on top of the iframe.
+
+Note: The `/extras` route and `ExtrasModal.svelte` are functionally parallel — the route is a standalone page, the modal overlays the homepage theme iframe.
+
+## AI Theme Generation (`src/routes/api/generate/+server.ts`)
+
+POST endpoint accepting `{ theme, locale }`. The pipeline:
+
+1. **(Optional) Translate to English** — if `locale === 'es'`, calls `claude-haiku-4-5` to translate the vibe prompt so image queries and design direction stay accurate
+2. **Extract image queries** — fast `claude-haiku-4-5` call returns `primaryQuery` + up to 2 `imageQueries` for Unsplash
+3. **Fetch Unsplash photos** — parallel fetch; capped at 3 requests total (1 primary + 2 extras); skipped entirely if `UNSPLASH_ACCESS_KEY` is absent
+4. **Stream full HTML** — `claude-sonnet-4-6` with `max_tokens: 4500` streams a complete HTML document; images are injected into the prompt; the response is streamed directly to the client to avoid Vercel's 504 gateway timeout
+
+The Vercel function timeout is set to 60 seconds (`export const config = { maxDuration: 60 }`).
+
+The client (`src/routes/+page.svelte`) reads the stream chunk-by-chunk, strips any markdown fences, and validates that the response ends with `</html>` before injecting into an iframe.
+
+## i18n
+
+`svelte-i18n` with English (`src/locales/en.json`) and Spanish (`src/locales/es.json`). Initialized in `src/lib/i18n.js`; browser locale auto-detected with English fallback. The layout `+layout.ts` imports `$lib/i18n` to ensure initialization before any page renders.
+
+There is also a `messages/` directory at the project root used by the inlang/Paraglide toolchain for translation management — this is separate from the `src/locales/` files consumed at runtime by svelte-i18n.
 
 ## Code Style
 
