@@ -10,10 +10,10 @@
 		</a>
 		<h1 class="mb-4 text-end text-4xl">{$t('about.title')}</h1>
 	</div>
-	<p class="pt-4 md:text-lg">{$t('about.p1')}</p>
-	<p class="pt-4 md:text-lg">{$t('about.p2')}</p>
-	<p class="pt-4 md:text-lg">{$t('about.p3')}</p>
-	<p class="pt-4 md:text-lg">{$t('about.p4')}</p>
+	<p class="pt-4 md:text-lg font-[450]">{$t('about.p1')}</p>
+	<p class="pt-4 md:text-lg font-[450]">{$t('about.p2')}</p>
+	<p class="pt-4 md:text-lg font-[450]">{$t('about.p3')}</p>
+	<p class="pt-4 md:text-lg font-[450]">{$t('about.p4')}</p>
 </section>
 
 <style>
