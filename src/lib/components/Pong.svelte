@@ -8,10 +8,10 @@
 	const W = 600;
 	const H = 400;
 
-	const PADDLE_W = 10;
-	const PADDLE_H = 70;
+	const PADDLE_W = 8;
+	const PADDLE_H = 50;
 	const PADDLE_OFFSET = 16;
-	const BALL_R = 7;
+	const BALL_R = 5;
 	const GREEN = '#00ff41';
 	const GREEN_DIM = 'rgba(0, 200, 50, 0.4)';
 
