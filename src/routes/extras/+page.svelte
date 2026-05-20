@@ -94,12 +94,14 @@
 
 	.close-btn {
 		display: inline-flex;
-		transition: transform 0.2s ease, color 0.2s ease;
 	}
 
-	.close-btn:hover {
-		transform: scale(1.25);
-		color: #33759a;
+	.close-btn :global(svg) {
+		transition: stroke-width 0.15s ease;
+	}
+
+	.close-btn:hover :global(svg) {
+		stroke-width: 2;
 	}
 
 	.pong-btn {
