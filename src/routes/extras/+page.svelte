@@ -5,22 +5,21 @@
 
 <section class="glass-panel">
 	<div class="flex justify-between">
-		<a href="/">
-			<X size="36" strokeWidth="1" />
-		</a>
-
 		<h1 class="mb-6 text-end text-4xl">{$t('extras.title')}</h1>
+		<a href="/" class="close-btn">
+			<X size={36} strokeWidth={1} />
+		</a>
 	</div>
 
 
 	<h2 class="pb-1 text-2xl">{$t('extras.music')}</h2>
 	<ul class="list-inside pb-6">
-		<li class="pb-1 text-xl">– <a href="https://rohco.vercel.app/" target="_blank" rel="noopener noreferrer">{$t('extras.music.rohco')}</a></li>
 		<li class="pb-1 text-xl">
-			– <a href="https://nomadic-archive.vercel.app/" target="_blank" rel="noopener noreferrer">{$t('extras.music.nomadic')}</a>
-		</li>
+			<a href="https://nomadic-archive.vercel.app/" target="_blank" rel="noopener noreferrer">{$t('extras.music.nomadic')}</a></li>
+		<li class="pb-1 text-xl"><a href="https://rohco.vercel.app/" target="_blank" rel="noopener noreferrer">{$t('extras.music.rohco')}</a></li>
 	</ul>
 
+	<h2 class="pb-1 text-2xl">{$t('extras.games')}</h2>
 	<a href="/pong" class="pong-btn">
 		<div class="pong-screen">
 			<div class="mini-pong" aria-hidden="true">
@@ -82,24 +81,34 @@
 		}
 	}
 
-	a:not(.pong-btn) {
+	a:not(.pong-btn):not(.close-btn) {
 		color: black;
 		text-decoration: underline;
 		text-decoration-thickness: 1px;
 		text-underline-offset: 2px;
 	}
 
-	a:not(.pong-btn):hover {
+	a:not(.pong-btn):not(.close-btn):hover {
 		font-weight: 500;
+	}
+
+	.close-btn {
+		display: inline-flex;
+		transition: transform 0.2s ease, color 0.2s ease;
+	}
+
+	.close-btn:hover {
+		transform: scale(1.25);
+		color: #33759a;
 	}
 
 	.pong-btn {
 		display: block;
 		text-decoration: none;
 		margin-top: auto;
-		padding-top: 1.5rem;
-		padding-left: 2rem;
-		padding-right: 2rem;
+		margin-right: auto;
+		width: 40%;
+		padding-top: .5rem;
 	}
 
 	.pong-screen {
@@ -111,7 +120,8 @@
 			0 0 0 2px #555,
 			0 0 20px rgba(0, 255, 0, 0.25),
 			inset 0 0 40px rgba(0, 0, 0, 0.8);
-		padding: 1.5rem 2rem;
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;

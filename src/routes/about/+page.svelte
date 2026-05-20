@@ -5,15 +5,15 @@
 
 <section class="glass-panel">
 	<div class="flex justify-between">
-		<a href="/">
-			<X size="36" strokeWidth="1" />
-		</a>
 		<h1 class="mb-4 text-end text-4xl">{$t('about.title')}</h1>
+		<a href="/" class="close-btn">
+			<X size={36} strokeWidth={1} />
+		</a>
 	</div>
-	<p class="pt-4 md:text-lg font-[450]">{$t('about.p1')}</p>
-	<p class="pt-4 md:text-lg font-[450]">{$t('about.p2')}</p>
-	<p class="pt-4 md:text-lg font-[450]">{$t('about.p3')}</p>
-	<p class="pt-4 md:text-lg font-[450]">{$t('about.p4')}</p>
+	<p class="pt-4 font-[450] md:text-lg">{$t('about.p1')}</p>
+	<p class="pt-4 font-[450] md:text-lg">{$t('about.p2')}</p>
+	<p class="pt-4 font-[450] md:text-lg">{$t('about.p3')}</p>
+	<p class="pt-4 font-[450] md:text-lg">{$t('about.p4')}</p>
 </section>
 
 <style>
@@ -53,5 +53,15 @@
 			box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 			border-radius: 0%;
 		}
+	}
+
+	.close-btn {
+		display: inline-flex;
+		transition: transform 0.2s ease, color 0.2s ease;
+	}
+
+	.close-btn:hover {
+		transform: scale(1.25);
+		color: #33759a;
 	}
 </style>

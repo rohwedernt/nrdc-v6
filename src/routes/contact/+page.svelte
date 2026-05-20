@@ -5,11 +5,10 @@
 
 <section class="glass-panel mx-8">
 	<div class="flex justify-between">
-		<a href="/">
-			<X size="36" strokeWidth="1" />
-		</a>
-
 		<h1 class="mb-6 text-end text-4xl">{$t('nav.contact')}</h1>
+		<a href="/" class="close-btn">
+			<X size={36} strokeWidth={1} />
+		</a>
 	</div>
 
 	<div class="flex w-full flex-grow items-center justify-center">
@@ -93,6 +92,16 @@
 			box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 			border-radius: 0%;
 		}
+	}
+
+	.close-btn {
+		display: inline-flex;
+		transition: transform 0.2s ease, color 0.2s ease;
+	}
+
+	.close-btn:hover {
+		transform: scale(1.25);
+		color: #33759a;
 	}
 
 	.contact-item {
