@@ -22,8 +22,8 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 
-		width: 75vw;
-		max-height: 90vh;
+		/* Canvas is 600×400 (3:2). Limit width so height never exceeds 90vh. */
+		width: min(75vw, calc(90vh * 1.5));
 
 		z-index: 3;
 	}
