@@ -18,6 +18,7 @@
   "extras.games.pong": "Face off with a bouncing dot in",
   "extras.games.pong.link": "Pong",
   "pong.score": "Score:",
+  "pong.start": "space to start",
   "pong.exit": "esc to exit",
   "contact.email": "e-mail",
   "contact.linkedin": "linkedin",

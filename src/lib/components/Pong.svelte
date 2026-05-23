@@ -1,6 +1,8 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { t } from 'svelte-i18n';
+	import { onMount } from 'svelte';
+	import { get } from 'svelte/store';
+	import { beforeNavigate } from '$app/navigation';
+	import { t, waitLocale } from 'svelte-i18n';
 
 	let canvas: HTMLCanvasElement;
 	let ctx: CanvasRenderingContext2D;
@@ -28,15 +30,48 @@
 
 	let upPressed = false;
 	let downPressed = false;
+	let started = false;
+	let animationFrame: number;
+
+	let exitHint = 'esc to exit';
+	let startHint = 'space to start';
 
 	const PLAYER_SPEED = 6;
 	const AI_SPEED = 3.2;
 	const MAX_SPEED = 11;
 
+	// Stop animation and blank canvas before the layout fade-out begins.
+	// Without this, the rAF loop keeps running during the 250ms transition
+	// and the pong game is visible behind the incoming page.
+	beforeNavigate(() => {
+		cancelAnimationFrame(animationFrame);
+		if (ctx) {
+			ctx.fillStyle = '#111';
+			ctx.fillRect(0, 0, W, H);
+		}
+	});
+
 	onMount(() => {
 		ctx = canvas.getContext('2d')!;
-		let animationFrame: number;
+		window.addEventListener('keydown', handleKeyDown);
+		window.addEventListener('keyup', handleKeyUp);
+		draw();
+		waitLocale().then(() => {
+			const tf = get(t);
+			exitHint = tf('pong.exit');
+			startHint = tf('pong.start');
+			if (!started) draw();
+		});
 
+		return () => {
+			cancelAnimationFrame(animationFrame);
+			window.removeEventListener('keydown', handleKeyDown);
+			window.removeEventListener('keyup', handleKeyUp);
+		};
+	});
+
+	function startGame() {
+		started = true;
 		const loop = () => {
 			movePlayer();
 			moveAI();
@@ -44,19 +79,17 @@
 			draw();
 			animationFrame = requestAnimationFrame(loop);
 		};
-
 		loop();
-		window.addEventListener('keydown', handleKeyDown);
-		window.addEventListener('keyup', handleKeyUp);
-
-		onDestroy(() => {
-			cancelAnimationFrame(animationFrame);
-			window.removeEventListener('keydown', handleKeyDown);
-			window.removeEventListener('keyup', handleKeyUp);
-		});
-	});
+	}
 
 	function handleKeyDown(e: KeyboardEvent) {
+		if (!started) {
+			if (e.key === ' ') {
+				e.preventDefault();
+				startGame();
+			}
+			return;
+		}
 		if (e.key === 'ArrowUp') { upPressed = true; e.preventDefault(); }
 		if (e.key === 'ArrowDown') { downPressed = true; e.preventDefault(); }
 	}
@@ -205,11 +238,21 @@
 		ctx.fill();
 		noGlow();
 
+		// Start prompt (shown before game begins)
+		if (!started) {
+			glow(GREEN, 10);
+			ctx.fillStyle = GREEN;
+			ctx.font = 'bold 15px "Courier New", monospace';
+			ctx.textAlign = 'center';
+			ctx.fillText(startHint, W / 2, H / 2 + 36);
+			noGlow();
+		}
+
 		// Exit hint
 		ctx.fillStyle = GREEN_DIM;
 		ctx.font = '11px "Courier New", monospace';
 		ctx.textAlign = 'center';
-		ctx.fillText($t('pong.exit'), W / 2, H - 10);
+		ctx.fillText(exitHint, W / 2, H - 10);
 	}
 </script>
 
