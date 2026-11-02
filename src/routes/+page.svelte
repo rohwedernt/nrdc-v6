@@ -3,6 +3,17 @@
 	import { fade, scale } from 'svelte/transition';
 	import { extrasStore } from '$lib/stores/extras';
 	import ExtrasModal from '$lib/components/ExtrasModal.svelte';
+	import { PAINT, splatPath, droplets } from '$lib/paint';
+
+	// "make it yours" button: a black splat with the theme colors hiding behind it
+	const inkPath = splatPath(67);
+	const btnColors = [
+		{ color: PAINT.teal, seed: 7, rot: -25, dx: -14, dy: -10, delay: 0 },
+		{ color: PAINT.mustard, seed: 23, rot: 40, dx: 14, dy: -12, delay: 50 },
+		{ color: PAINT.rust, seed: 71, rot: 110, dx: 4, dy: 14, delay: 100 }
+	].map((c) => ({ ...c, path: splatPath(c.seed) }));
+	const dropColors = [PAINT.teal, PAINT.mustard, PAINT.rust, PAINT.ink];
+	const btnDrops = droplets(67, 8, 0.8).map((d, i) => ({ ...d, color: dropColors[i % 4] }));
 
 	type Status = 'idle' | 'loading' | 'done' | 'error';
 
@@ -105,18 +116,35 @@
 		</div>
 	{/if}
 
-	<!-- Magical orb button -->
+	<!-- Paint-splat "make it yours" button -->
 	{#if !promptOpen}
 		<button
-			class="orb-btn"
+			class="splat-btn"
 			on:click={() => (promptOpen = true)}
-			aria-label="Open theme generator"
+			aria-label={$t('theme.button')}
 			transition:scale={{ duration: 300, start: 0.6 }}
 		>
-			<span class="orb-core"><span class="orb-n">N</span></span>
-			<span class="orb-ring ring-1"></span>
-			<span class="orb-ring ring-2"></span>
-			<span class="orb-ring ring-3"></span>
+			{#each btnColors as c}
+				<svg
+					class="splat-layer color-layer"
+					style="--paint: {c.color}; --rot: {c.rot}deg; --dx: {c.dx}px; --dy: {c.dy}px; --delay: {c.delay}ms;"
+					viewBox="-100 -100 200 200"
+					aria-hidden="true"
+				>
+					<path d={c.path} />
+				</svg>
+			{/each}
+			{#each btnDrops as d}
+				<span
+					class="btn-drop"
+					style="--paint: {d.color}; --x: {d.x}px; --y: {d.y}px; --s: {d.size}px; --delay: {d.delay}ms;"
+					aria-hidden="true"
+				></span>
+			{/each}
+			<svg class="splat-layer ink-layer" viewBox="-100 -100 200 200" aria-hidden="true">
+				<path d={inkPath} />
+			</svg>
+			<span class="splat-label">{$t('theme.button')}</span>
 		</button>
 	{/if}
 
@@ -166,178 +194,129 @@
 {/if}
 
 <style>
-	/* ── Orb button ── */
-	.orb-btn {
+/* ── "Make it yours" splat button ── */
+	.splat-btn {
 		position: fixed;
-		bottom: 1.5rem;
-		left: 1.5rem;
+		bottom: 1.25rem;
+		left: 1.25rem;
 		z-index: 10;
-		width: 64px;
-		height: 64px;
-		border-radius: 50%;
+		width: 112px;
+		height: 112px;
+		padding: 0;
 		border: none;
+		border-radius: 50%;
 		background: transparent;
 		cursor: pointer;
-		padding: 0;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+		display: grid;
+		place-items: center;
+		transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
 
-	.orb-btn:hover {
-		transform: scale(1.2);
+	.splat-btn:active {
+		transform: scale(0.9);
+		transition-duration: 0.1s;
 	}
 
-	.orb-btn:hover .orb-core {
-		box-shadow:
-			0 0 24px 8px rgba(24, 180, 204, 0.7),
-			0 0 48px 16px rgba(245, 194, 24, 0.45),
-			0 0 72px 24px rgba(232, 128, 28, 0.3);
+	.splat-btn:focus-visible {
+		outline: 2px solid white;
+		outline-offset: 6px;
 	}
 
-	.orb-btn:hover .ring-1 {
-		opacity: 1;
-		animation-duration: 1.2s;
-	}
-
-	.orb-btn:hover .ring-2 {
-		opacity: 0.85;
-		animation-duration: 2s;
-	}
-
-	.orb-btn:hover .ring-3 {
-		opacity: 0.65;
-		animation-duration: 2.8s;
-	}
-
-	.orb-core {
+	.splat-layer {
 		position: absolute;
-		width: 36px;
-		height: 36px;
-		border-radius: 50%;
-		background: #0f1c24;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		box-shadow:
-			0 0 16px 4px rgba(24, 180, 204, 0.5),
-			0 0 32px 10px rgba(245, 194, 24, 0.3),
-			0 0 48px 16px rgba(232, 128, 28, 0.2);
-		transition: box-shadow 0.3s ease;
-		animation: orb-pulse 3s ease-in-out infinite;
-	}
-
-	.orb-n {
-		font-size: 1.1rem;
-		font-weight: 900;
-		line-height: 1;
-		letter-spacing: -0.02em;
-		background: linear-gradient(135deg, #18B4CC 0%, #F5C218 50%, #E8801C 100%);
-		-webkit-background-clip: text;
-		background-clip: text;
-		-webkit-text-fill-color: transparent;
-		animation: n-spin 6s linear infinite;
-		display: block;
-		user-select: none;
-	}
-
-	.orb-btn:hover .orb-n {
-		animation-duration: 2.5s;
-	}
-
-	.orb-ring {
-		position: absolute;
-		border-radius: 50%;
-		border: 1.5px solid transparent;
-		animation-timing-function: linear;
-		animation-iteration-count: infinite;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		overflow: visible;
 		pointer-events: none;
-		transition: opacity 0.3s ease, animation-duration 0.3s ease;
 	}
 
-	.ring-1 {
-		width: 48px;
-		height: 48px;
-		background: conic-gradient(
-			from 0deg,
-			transparent 0%,
-			rgba(24, 180, 204, 0.85) 20%,
-			rgba(245, 194, 24, 0.8) 45%,
-			rgba(232, 128, 28, 0.65) 65%,
-			rgba(24, 180, 204, 0.85) 100%
-		);
-		-webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
-		mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
-		opacity: 0.85;
-		animation-name: spin-cw;
-		animation-duration: 2s;
+	.ink-layer {
+		fill: #1f2326;
+		transform: scale(1.22);
+		filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35));
+		animation: ink-breathe 5s ease-in-out infinite;
 	}
 
-	.ring-2 {
-		width: 60px;
-		height: 60px;
-		background: conic-gradient(
-			from 120deg,
-			transparent 0%,
-			rgba(245, 194, 24, 0.6) 20%,
-			rgba(24, 180, 204, 0.55) 45%,
-			rgba(28, 43, 53, 0.7) 65%,
-			rgba(232, 128, 28, 0.55) 85%,
-			transparent 100%
-		);
-		-webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
-		mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 2px));
-		opacity: 0.6;
-		animation-name: spin-ccw;
-		animation-duration: 3s;
+	/* theme colors hide behind the black, only a sliver peeking out */
+	.color-layer {
+		fill: var(--paint);
+		transform: translate(calc(var(--dx) * 0.35), calc(var(--dy) * 0.35)) rotate(var(--rot))
+			scale(1.12);
+		transition: transform 0.3s cubic-bezier(0.55, 0, 1, 0.45);
 	}
 
-	.ring-3 {
-		width: 72px;
-		height: 72px;
-		background: conic-gradient(
-			from 240deg,
-			transparent 0%,
-			rgba(232, 128, 28, 0.4) 20%,
-			rgba(24, 180, 204, 0.45) 45%,
-			rgba(245, 194, 24, 0.35) 70%,
-			transparent 90%
-		);
-		-webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 1.5px), #fff calc(100% - 1.5px));
-		mask: radial-gradient(farthest-side, transparent calc(100% - 1.5px), #fff calc(100% - 1.5px));
-		opacity: 0.45;
-		animation-name: spin-cw;
-		animation-duration: 4.5s;
+	.splat-btn:hover .color-layer,
+	.splat-btn:focus-visible .color-layer {
+		transform: translate(var(--dx), var(--dy)) rotate(calc(var(--rot) + 20deg)) scale(1.38);
+		transition: transform 0.55s cubic-bezier(0.34, 1.8, 0.5, 1) var(--delay);
 	}
 
-	@keyframes spin-cw {
-		from { transform: rotate(0deg); }
-		to   { transform: rotate(360deg); }
+	.btn-drop {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		width: var(--s);
+		height: var(--s);
+		margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
+		border-radius: 50%;
+		background: var(--paint);
+		transform: scale(0);
+		opacity: 0;
+		transition:
+			transform 0.2s ease-in,
+			opacity 0.2s ease-in;
+		pointer-events: none;
 	}
 
-	@keyframes spin-ccw {
-		from { transform: rotate(0deg); }
-		to   { transform: rotate(-360deg); }
+	.splat-btn:hover .btn-drop,
+	.splat-btn:focus-visible .btn-drop {
+		transform: translate(var(--x), var(--y)) scale(1);
+		opacity: 1;
+		transition:
+			transform 0.5s cubic-bezier(0.15, 0.9, 0.3, 1.2) calc(var(--delay) + 60ms),
+			opacity 0.1s linear calc(var(--delay) + 60ms);
 	}
 
-	@keyframes n-spin {
-		from { transform: rotate(0deg); }
-		to   { transform: rotate(360deg); }
+	.splat-label {
+		position: relative;
+		max-width: 64px;
+		font-size: 0.8rem;
+		font-weight: 700;
+		line-height: 1.05;
+		letter-spacing: 0.01em;
+		text-align: center;
+		text-transform: lowercase;
+		color: white;
+		user-select: none;
+		transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
 
-	@keyframes orb-pulse {
-		0%, 100% {
-			box-shadow:
-				0 0 16px 4px rgba(24, 180, 204, 0.5),
-				0 0 32px 10px rgba(245, 194, 24, 0.3),
-				0 0 48px 16px rgba(232, 128, 28, 0.2);
+	.splat-btn:hover .splat-label,
+	.splat-btn:focus-visible .splat-label {
+		transform: rotate(-6deg) scale(1.08);
+	}
+
+	@keyframes ink-breathe {
+		0%,
+		100% {
+			transform: scale(1.22) rotate(0deg);
 		}
 		50% {
-			box-shadow:
-				0 0 22px 7px rgba(24, 180, 204, 0.75),
-				0 0 44px 14px rgba(245, 194, 24, 0.5),
-				0 0 64px 22px rgba(232, 128, 28, 0.35);
+			transform: scale(1.27) rotate(5deg);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.ink-layer {
+			animation: none;
+		}
+
+		.color-layer,
+		.btn-drop,
+		.splat-label {
+			transition-duration: 0.01ms !important;
+			transition-delay: 0s !important;
 		}
 	}
 
@@ -582,7 +561,7 @@
 
 	/* ── Responsive ── */
 	@media (max-width: 785px) {
-		.orb-btn {
+		.splat-btn {
 			bottom: 1rem;
 			left: unset;
 			right: 1.5rem;
