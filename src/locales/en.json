@@ -37,6 +37,9 @@
 	"theme.generate": "Generate",
 	"theme.skip": "Cancel generation",
 	"theme.loading": "Designing your experience…",
+	"theme.loading.concept": "the concept",
+	"theme.loading.starting": "Setting up…",
+	"theme.loading.building": "Building your page…",
 	"theme.redesign": "← Redesign",
 	"theme.error": "Something went wrong — want to try again?"
 }

@@ -38,6 +38,9 @@
 	"theme.generate": "Generar",
 	"theme.skip": "Cancelar generación",
 	"theme.loading": "Diseñando tu experiencia…",
+	"theme.loading.concept": "el concepto",
+	"theme.loading.starting": "Preparando…",
+	"theme.loading.building": "Construyendo tu página…",
 	"theme.redesign": "← Rediseñar",
 	"theme.error": "Algo salió mal — ¿quieres intentarlo de nuevo?"
 }

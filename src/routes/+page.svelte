@@ -23,11 +23,70 @@
 	let controller: AbortController | null = null;
 	let promptOpen = false;
 
+	// Preview of the creative brief (first line of the stream), shown while the page builds
+	type BriefPreview = {
+		conceptName?: string;
+		interpretation?: string;
+		palette?: string[];
+		fonts?: string[];
+	};
+	let brief: BriefPreview | null = null;
+	let received = 0;
+	const EXPECTED_CHARS = 28000; // rough size of a finished page, only used for the progress bar
+	$: progress = Math.min(0.96, received / EXPECTED_CHARS);
+
+	let frame: HTMLIFrameElement | null = null;
+
+	// Injected into every generated page: lets it open Pong in the host page and passes
+	// keyboard shortcuts up, since key events inside the iframe never reach the parent window.
+	const BRIDGE = `<script>(()=>{const s=t=>parent.postMessage({source:'nrdc-theme',type:t},'*');
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-nrdc="pong"]');if(b){e.preventDefault();s('pong');}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')s('escape');const k=e.key.toLowerCase();if(e.altKey&&e.shiftKey&&(k==='/'||k==='¿')){e.preventDefault();s('extras');}});})();</` + 'script>';
+
+	function prepareHtml(raw: string): string {
+		let html = raw
+			.trim()
+			.replace(/^```(?:html)?\n?/i, '')
+			.replace(/\n?```\s*$/i, '');
+		// Drop any stray preamble before the document starts
+		const start = html.search(/<!doctype html|<html/i);
+		if (start > 0) html = html.slice(start);
+		const end = html.toLowerCase().lastIndexOf('</html>');
+		if (start < 0 || end < 0) throw new Error('Truncated response');
+		html = html.slice(0, end + 7);
+		const bodyClose = html.toLowerCase().lastIndexOf('</body>');
+		return bodyClose >= 0
+			? html.slice(0, bodyClose) + BRIDGE + html.slice(bodyClose)
+			: html.replace(/<\/html>$/i, BRIDGE + '</html>');
+	}
+
+	function handleFrameMessage(e: MessageEvent) {
+		if (!frame || e.source !== frame.contentWindow) return;
+		const type =
+			(e.data as { source?: string; type?: string })?.source === 'nrdc-theme' && e.data.type;
+		if (type === 'pong' || type === 'extras') {
+			// Move keyboard focus out of the iframe so Pong's window key listeners (and Escape) work
+			frame.blur();
+			window.focus();
+		}
+		if (type === 'pong') {
+			extrasStore.openExtras();
+			extrasStore.openPong();
+		} else if (type === 'extras') {
+			extrasStore.openExtras();
+		} else if (type === 'escape') {
+			if ($extrasStore.showPong) extrasStore.closePong();
+			else if ($extrasStore.open) extrasStore.closeExtras();
+		}
+	}
+
 	async function generate() {
 		const trimmed = themeInput.trim();
 		if (!trimmed) return;
 		status = 'loading';
 		promptOpen = false;
+		brief = null;
+		received = 0;
 		controller = new AbortController();
 		try {
 			const res = await fetch('/api/generate', {
@@ -38,18 +97,29 @@
 			});
 			if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-			// Read the streamed HTML response chunk by chunk
+			// Stream: first line is a JSON brief preview, the rest is the HTML document
 			const reader = res.body!.getReader();
 			const decoder = new TextDecoder();
-			let html = '';
+			let buffer = '';
+			let briefParsed = false;
 			while (true) {
 				const { done, value } = await reader.read();
 				if (done) break;
-				html += decoder.decode(value, { stream: true });
+				buffer += decoder.decode(value, { stream: true });
+				if (!briefParsed) {
+					const nl = buffer.indexOf('\n');
+					if (nl === -1) continue;
+					try {
+						brief = JSON.parse(buffer.slice(0, nl));
+					} catch {
+						brief = null;
+					}
+					buffer = buffer.slice(nl + 1);
+					briefParsed = true;
+				}
+				received = buffer.length;
 			}
-			html = html.trim().replace(/^```(?:html)?\n?/i, '').replace(/\n?```$/i, '');
-			if (!html.includes('</html>')) throw new Error('Truncated response');
-			generatedHtml = html;
+			generatedHtml = prepareHtml(buffer);
 			status = 'done';
 		} catch (err) {
 			if (err instanceof Error && err.name === 'AbortError') {
@@ -73,6 +143,7 @@
 		themeInput = '';
 		generatedHtml = '';
 		promptOpen = false;
+		extrasStore.closeExtras();
 	}
 
 	function handleKeydown(e: KeyboardEvent) {
@@ -87,6 +158,8 @@
 	}
 </script>
 
+<svelte:window on:message={handleFrameMessage} />
+
 <svelte:head>
 	<title>Nate Rohweder</title>
 	<meta name="description" content="Nate Rohweder Dot Com" />
@@ -95,6 +168,7 @@
 {#if status === 'done'}
 	<div class="iframe-wrap" transition:fade={{ duration: 200 }}>
 		<iframe
+			bind:this={frame}
 			title="Themed portfolio"
 			srcdoc={generatedHtml}
 			sandbox="allow-scripts allow-same-origin allow-top-navigation allow-forms allow-popups"
@@ -110,8 +184,38 @@
 {:else}
 	{#if status === 'loading'}
 		<div class="loading-overlay" transition:fade={{ duration: 150 }}>
-			<div class="spinner"></div>
-			<p>{$t('theme.loading')}</p>
+			{#if brief?.conceptName}
+				<div class="brief" in:fade={{ duration: 400 }}>
+					<p class="brief-kicker">{$t('theme.loading.concept')}</p>
+					<h2 class="brief-name">{brief.conceptName}</h2>
+					{#if brief.interpretation}
+						<p class="brief-text">{brief.interpretation}</p>
+					{/if}
+					{#if brief.palette?.length}
+						<div class="swatches" aria-hidden="true">
+							{#each brief.palette as hex, i (i)}
+								<span class="swatch" style="--c: {hex}; --i: {i}"></span>
+							{/each}
+						</div>
+					{/if}
+					{#if brief.fonts?.length}
+						<p class="brief-fonts">{brief.fonts.join(' · ')}</p>
+					{/if}
+				</div>
+				<div
+					class="progress"
+					role="progressbar"
+					aria-valuemin="0"
+					aria-valuemax="100"
+					aria-valuenow={Math.round(progress * 100)}
+				>
+					<div class="progress-fill" style="transform: scaleX({progress})"></div>
+				</div>
+				<p>{$t(received > 0 ? 'theme.loading.building' : 'theme.loading.starting')}</p>
+			{:else}
+				<div class="spinner"></div>
+				<p>{$t('theme.loading')}</p>
+			{/if}
 			<button class="btn-cancel" on:click={cancel}>{$t('theme.skip')}</button>
 		</div>
 	{/if}
@@ -151,18 +255,16 @@
 	<!-- Prompt card (centered, modal style) -->
 	{#if promptOpen}
 		<!-- svelte-ignore a11y-click-events-have-key-events a11y-no-static-element-interactions -->
-		<div
-			class="prompt-backdrop"
-			on:click={closePrompt}
-			transition:fade={{ duration: 200 }}
-		></div>
-		<div
-			class="prompt-card"
-			transition:scale={{ duration: 250, start: 0.9 }}
-		>
+		<div class="prompt-backdrop" on:click={closePrompt} transition:fade={{ duration: 200 }}></div>
+		<div class="prompt-card" transition:scale={{ duration: 250, start: 0.9 }}>
 			<button class="btn-close" on:click={closePrompt} aria-label="Close">
 				<svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-					<path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" />
+					<path
+						d="M1 1l12 12M13 1L1 13"
+						stroke="currentColor"
+						stroke-width="1.75"
+						stroke-linecap="round"
+					/>
 				</svg>
 			</button>
 			{#if status === 'error'}
@@ -194,7 +296,7 @@
 {/if}
 
 <style>
-/* ── "Make it yours" splat button ── */
+	/* ── "Make it yours" splat button ── */
 	.splat-btn {
 		position: fixed;
 		bottom: 1.25rem;
@@ -366,7 +468,9 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		transition: background 0.15s, color 0.15s;
+		transition:
+			background 0.15s,
+			color 0.15s;
 		padding: 0;
 	}
 
@@ -453,7 +557,9 @@
 		border: none;
 		cursor: pointer;
 		white-space: nowrap;
-		transition: background 0.15s, opacity 0.15s;
+		transition:
+			background 0.15s,
+			opacity 0.15s;
 	}
 
 	.btn-generate:hover:not(:disabled) {
@@ -494,6 +600,91 @@
 		margin: 0;
 	}
 
+	.loading-overlay {
+		padding: 1.5rem;
+		text-align: center;
+	}
+
+	.brief {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.6rem;
+		max-width: 34rem;
+	}
+
+	.brief-kicker {
+		font-size: 0.7rem;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: rgba(255, 255, 255, 0.45);
+	}
+
+	.brief-name {
+		margin: 0;
+		font-size: clamp(1.75rem, 5vw, 2.75rem);
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		line-height: 1.1;
+		color: #fff;
+	}
+
+	.brief-text {
+		font-size: 0.95rem;
+		line-height: 1.55;
+		color: rgba(255, 255, 255, 0.7);
+	}
+
+	.brief-fonts {
+		font-size: 0.75rem;
+		color: rgba(255, 255, 255, 0.45);
+	}
+
+	.swatches {
+		display: flex;
+		gap: 0.5rem;
+		margin: 0.4rem 0 0.2rem;
+	}
+
+	.swatch {
+		width: 2rem;
+		height: 2rem;
+		border-radius: 50%;
+		background: var(--c);
+		box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2);
+		animation: swatch-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+		animation-delay: calc(var(--i) * 70ms);
+	}
+
+	@keyframes swatch-in {
+		from {
+			transform: scale(0);
+			opacity: 0;
+		}
+	}
+
+	.progress {
+		width: min(18rem, 70vw);
+		height: 3px;
+		border-radius: 3px;
+		background: rgba(255, 255, 255, 0.12);
+		overflow: hidden;
+		margin-top: 0.75rem;
+	}
+
+	.progress-fill {
+		height: 100%;
+		background: rgba(255, 255, 255, 0.8);
+		transform-origin: left;
+		transition: transform 0.4s ease-out;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.swatch {
+			animation: none;
+		}
+	}
+
 	.spinner {
 		width: 36px;
 		height: 36px;
@@ -504,7 +695,9 @@
 	}
 
 	@keyframes spin {
-		to { transform: rotate(360deg); }
+		to {
+			transform: rotate(360deg);
+		}
 	}
 
 	.btn-cancel {

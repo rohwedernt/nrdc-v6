@@ -62,7 +62,7 @@
 		position: fixed;
 		inset: 0;
 		background: rgba(0, 0, 0, 0.6);
-		z-index: 1000;
+		z-index: 1003;
 	}
 
 	.modal {
@@ -70,7 +70,7 @@
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		z-index: 1001;
+		z-index: 1004;
 
 		min-width: 50vw;
 		max-width: 80vw;
