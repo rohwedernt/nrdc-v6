@@ -1,69 +1,39 @@
 <script lang="ts">
-	import { X } from 'lucide-svelte';
 	import { t } from 'svelte-i18n';
+	import InkCard from '$lib/components/InkCard.svelte';
+
+	const splats = [
+		{ x: 3, y: -4, size: 280, seed: 5, delay: 0, rot: -15 },
+		{ x: 101, y: 38, size: 230, seed: 17, delay: 130, rot: 30 },
+		{ x: 18, y: 101, size: 190, seed: 61, delay: 230, rot: 80 },
+		{ x: 94, y: 99, size: 120, seed: 97, delay: 320, rot: 0 }
+	];
+
+	const paragraphs = ['about.p1', 'about.p2', 'about.p3', 'about.p4'];
 </script>
 
-<section class="glass-panel">
-	<div class="flex justify-between">
-		<h1 class="mb-4 text-end text-4xl">{$t('about.title')}</h1>
-		<a href="/" class="close-btn">
-			<X size={36} strokeWidth={1} />
-		</a>
-	</div>
-	<p class="pt-4 font-[450] md:text-lg">{$t('about.p1')}</p>
-	<p class="pt-4 font-[450] md:text-lg">{$t('about.p2')}</p>
-	<p class="pt-4 font-[450] md:text-lg">{$t('about.p3')}</p>
-	<p class="pt-4 font-[450] md:text-lg">{$t('about.p4')}</p>
-</section>
+<InkCard title={$t('about.title')} {splats}>
+	{#each paragraphs as key, i}
+		<p class="para pt-4 font-[450] md:text-lg" style="--i: {i};">{$t(key)}</p>
+	{/each}
+</InkCard>
 
 <style>
-	.glass-panel {
-		position: fixed;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
+	.para {
+		animation: rise 0.5s ease-out backwards;
+		animation-delay: calc(0.6s + var(--i) * 90ms);
+	}
 
-		min-width: 80vw;
-		max-width: 80vw;
-		max-height: 80vh;
-
-		padding: 2rem;
-		margin: auto;
-
-		color: black;
-
-		background: rgba(255, 255, 255, 0.7);
-		border-radius: 1rem;
-		backdrop-filter: blur(6px);
-		-webkit-backdrop-filter: blur(6px);
-		box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5), 0 4px 30px rgba(0, 0, 0, 0.3);
-		border: 1px solid rgba(255, 255, 255, 0.3);
-
-		display: flex;
-		flex-direction: column;
-		overflow: auto;
-
-		z-index: 3;
-
-		@media (max-width: 735px) {
-			padding: 1rem;
-			padding-top: 4rem;
-			min-width: 100vw;
-			min-height: 100vh;
-			box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-			border-radius: 0%;
+	@keyframes rise {
+		from {
+			opacity: 0;
+			transform: translateY(10px);
 		}
 	}
 
-	.close-btn {
-		display: inline-flex;
-	}
-
-	.close-btn :global(svg) {
-		transition: stroke-width 0.15s ease;
-	}
-
-	.close-btn:hover :global(svg) {
-		stroke-width: 2;
+	@media (prefers-reduced-motion: reduce) {
+		.para {
+			animation: none;
+		}
 	}
 </style>
