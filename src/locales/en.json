@@ -40,6 +40,13 @@
 	"theme.loading.concept": "the concept",
 	"theme.loading.starting": "Setting up…",
 	"theme.loading.building": "Building your page…",
+	"theme.quality.label": "Model",
+	"theme.quality.fast": "Fast",
+	"theme.quality.fast.time": "~1 min",
+	"theme.quality.best": "Best",
+	"theme.quality.best.time": "~3–4 min",
+	"theme.loading.eta.fast": "Usually about a minute",
+	"theme.loading.eta.best": "Opus takes its time: usually 3–4 minutes",
 	"theme.redesign": "← Redesign",
 	"theme.error": "Something went wrong — want to try again?"
 }

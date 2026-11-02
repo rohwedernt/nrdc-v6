@@ -7,17 +7,21 @@ import es from '../../../locales/es.json';
 
 export const prerender = false;
 
-// A generation takes ~40-50 s end to end (brief ~7 s + build ~35 s), so the old
-// 60 s cap left no headroom. 300 s is the Hobby ceiling with Fluid compute (default for
-// Vercel projects since 2025); if the project is on legacy functions, set this to 60.
+// Measured end to end: Sonnet ~40–50 s, Opus 2.5–3.5 min. 300 s is the Hobby ceiling
+// with Fluid compute (default for Vercel projects since 2025) and is required for Opus.
 export const config = { maxDuration: 300 };
 
 // ── Models ────────────────────────────────────────────────────────────────────
 // The brief is a small structured-JSON call, so it runs on the fastest model.
-// The build runs on Sonnet: in testing, Opus 5.5 gave richer pages but took 2.5–3.5 min,
-// while Sonnet stayed clearly on-theme at ~40 s. Swap to 'claude-opus-5-5' for maximum quality.
+// The build model is the visitor's choice in the prompt card: "fast" (Sonnet, the
+// default) or "best" (Opus, richer pages but a much longer wait). Only these two
+// values are accepted; anything else falls back to fast.
 const BRIEF_MODEL = 'claude-haiku-5-5';
-const BUILD_MODEL = 'claude-sonnet-5-5';
+const BUILD_MODELS = {
+	fast: 'claude-sonnet-5-5',
+	best: 'claude-opus-5-5'
+} as const;
+type Quality = keyof typeof BUILD_MODELS;
 const BUILD_EFFORT: 'low' | 'medium' | 'high' = 'medium';
 
 const CONTACT = {
@@ -371,15 +375,24 @@ export const POST: RequestHandler = async ({ request }) => {
 		throw error(500, 'ANTHROPIC_API_KEY is not configured');
 	}
 
-	const { theme, locale } = (await request.json()) as { theme: string; locale: Locale };
+	const { theme, locale, quality } = (await request.json()) as {
+		theme: string;
+		locale: Locale;
+		quality?: Quality;
+	};
 
 	if (!theme || typeof theme !== 'string' || theme.trim().length === 0) {
 		throw error(400, 'theme is required');
 	}
 
 	const safeTheme = theme.trim().slice(0, 500);
-	const safeLocale: Locale = locale === 'es' ? 'es' : 'en';
-	console.log(`[generate] theme="${safeTheme}" locale=${safeLocale}`);
+	const safeLocale: Locale = String(locale ?? '')
+		.toLowerCase()
+		.startsWith('es')
+		? 'es'
+		: 'en';
+	const buildModel = BUILD_MODELS[quality === 'best' ? 'best' : 'fast'];
+	console.log(`[generate] theme="${safeTheme}" locale=${safeLocale} model=${buildModel}`);
 
 	const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
 	const encoder = new TextEncoder();
@@ -412,7 +425,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
 				const stream = client.beta.messages.stream(
 					{
-						model: BUILD_MODEL,
+						model: buildModel,
 						max_tokens: 32000,
 						thinking: { type: 'adaptive' },
 						output_config: { effort: BUILD_EFFORT },

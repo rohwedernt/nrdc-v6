@@ -32,16 +32,27 @@
 	};
 	let brief: BriefPreview | null = null;
 	let received = 0;
-	const EXPECTED_CHARS = 28000; // rough size of a finished page, only used for the progress bar
-	$: progress = Math.min(0.96, received / EXPECTED_CHARS);
+	// Build model picker. "fast" = Sonnet (default), "best" = Opus.
+	type Quality = 'fast' | 'best';
+	const QUALITY_OPTIONS: { value: Quality; model: string }[] = [
+		{ value: 'fast', model: 'Sonnet' },
+		{ value: 'best', model: 'Opus' }
+	];
+	let quality: Quality = 'fast';
+	// Rough finished-page size per model, only used to drive the progress bar
+	const EXPECTED_CHARS: Record<Quality, number> = { fast: 14000, best: 28000 };
+	let activeQuality: Quality = 'fast';
+	$: progress = Math.min(0.96, received / EXPECTED_CHARS[activeQuality]);
 
 	let frame: HTMLIFrameElement | null = null;
 
 	// Injected into every generated page: lets it open Pong in the host page and passes
 	// keyboard shortcuts up, since key events inside the iframe never reach the parent window.
-	const BRIDGE = `<script>(()=>{const s=t=>parent.postMessage({source:'nrdc-theme',type:t},'*');
+	const BRIDGE =
+		`<script>(()=>{const s=t=>parent.postMessage({source:'nrdc-theme',type:t},'*');
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-nrdc="pong"]');if(b){e.preventDefault();s('pong');}});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')s('escape');const k=e.key.toLowerCase();if(e.altKey&&e.shiftKey&&(k==='/'||k==='¿')){e.preventDefault();s('extras');}});})();</` + 'script>';
+document.addEventListener('keydown',e=>{if(e.key==='Escape')s('escape');const k=e.key.toLowerCase();if(e.altKey&&e.shiftKey&&(k==='/'||k==='¿')){e.preventDefault();s('extras');}});})();</` +
+		'script>';
 
 	function prepareHtml(raw: string): string {
 		let html = raw
@@ -87,12 +98,13 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')s('escape');const k=
 		promptOpen = false;
 		brief = null;
 		received = 0;
+		activeQuality = quality;
 		controller = new AbortController();
 		try {
 			const res = await fetch('/api/generate', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ theme: trimmed, locale: $locale ?? 'en' }),
+				body: JSON.stringify({ theme: trimmed, locale: $locale ?? 'en', quality }),
 				signal: controller.signal
 			});
 			if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -212,6 +224,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')s('escape');const k=
 					<div class="progress-fill" style="transform: scaleX({progress})"></div>
 				</div>
 				<p>{$t(received > 0 ? 'theme.loading.building' : 'theme.loading.starting')}</p>
+				<p class="loading-eta">{$t(`theme.loading.eta.${activeQuality}`)}</p>
 			{:else}
 				<div class="spinner"></div>
 				<p>{$t('theme.loading')}</p>
@@ -275,6 +288,21 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')s('escape');const k=
 				<span class="beta-badge">beta</span>
 			</div>
 			<p class="subheadline">{$t('theme.subheadline')}</p>
+			<div class="quality" role="radiogroup" aria-label={$t('theme.quality.label')}>
+				{#each QUALITY_OPTIONS as opt (opt.value)}
+					<label class="quality-opt" class:selected={quality === opt.value}>
+						<input
+							type="radio"
+							name="quality"
+							value={opt.value}
+							bind:group={quality}
+							disabled={status === 'loading'}
+						/>
+						<span class="quality-name">{$t(`theme.quality.${opt.value}`)}</span>
+						<span class="quality-meta">{opt.model} · {$t(`theme.quality.${opt.value}.time`)}</span>
+					</label>
+				{/each}
+			</div>
 			<div class="input-row">
 				<input
 					type="text"
@@ -514,6 +542,68 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')s('escape');const k=
 		color: #292929;
 		margin: 0;
 		line-height: 1.5;
+	}
+
+	/* ── Model picker (segmented control) ── */
+	.quality {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0.25rem;
+		padding: 0.25rem;
+		border-radius: 0.75rem;
+		background: rgba(0, 0, 0, 0.08);
+		border: 1px solid rgba(0, 0, 0, 0.08);
+	}
+
+	.quality-opt {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: 0.1rem;
+		padding: 0.45rem 0.7rem;
+		border-radius: 0.55rem;
+		cursor: pointer;
+		transition:
+			background 0.15s,
+			box-shadow 0.15s;
+	}
+
+	.quality-opt:hover:not(.selected) {
+		background: rgba(255, 255, 255, 0.35);
+	}
+
+	.quality-opt.selected {
+		background: rgba(255, 255, 255, 0.92);
+		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+	}
+
+	.quality-opt:has(input:focus-visible) {
+		outline: 2px solid #111;
+		outline-offset: 1px;
+	}
+
+	.quality-opt input {
+		position: absolute;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.quality-name {
+		font-size: 0.85rem;
+		font-weight: 650;
+		color: #111;
+		line-height: 1.2;
+	}
+
+	.quality-meta {
+		font-size: 0.72rem;
+		color: #444;
+		line-height: 1.2;
+	}
+
+	.loading-eta {
+		font-size: 0.78rem;
+		color: rgba(255, 255, 255, 0.45);
 	}
 
 	.input-row {
